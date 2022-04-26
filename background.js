@@ -31,11 +31,6 @@ const newPageLoad = async () => {
   styleDiv.color = "white";
   styleDiv.height = "56vh";
   styleDiv.overflowY = "auto";
-  // styleDiv:: -webkit-scrollbar-track {
-  //   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  //   border-radius: 10px;
-  //   background-color: #F5F5F5;
-  // }
   if (location.href.includes("/products")) {
     const productName = document.querySelector(
       ".pdp-mod-product-badge-title"
