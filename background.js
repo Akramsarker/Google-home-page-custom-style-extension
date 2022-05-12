@@ -53,21 +53,26 @@ const newPageLoad = async () => {
                             <p style="font-size: 1.5rem; color: #ffffff;">Loading... </p>
                         </div>`;
 
+  let chaldalInnerHTML = `<div>
+                              <h1 style="font-size: 1.5rem; color: #ffffff; margin: 0; padding: 10px 0;">
+                                Similar Products
+                              </h1>
+                                <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
+                          </div>`;
+
   if (location.href.includes("/products")) {
     document.querySelector("#root").style.width = "1500px";
     document.querySelector(".pdp-block__product-detail").style.width =
       "calc(100% - 665px)";
     const createDev = document.createElement("div");
-    createDev.className = "compare-product-info";
+    createDev.setAttribute("class", "compare-product-info");
+    createDev.setAttribute(
+      "style",
+      "display: inline-block; width: 315px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: 60vh;"
+    );
     createDev.innerHTML = darazInnerHTML;
     document.querySelector("#block-3FfF28kZyT").appendChild(createDev);
-    const styleDiv = document.querySelector(".compare-product-info").style;
-    styleDiv.display = "inline-block";
-    styleDiv.width = "315px";
-    styleDiv.backgroundColor = "#26ACD5";
-    styleDiv.padding = "0 10px";
-    styleDiv.color = "white";
-    styleDiv.height = "60vh";
+
     const productName = document.querySelector(
       ".pdp-mod-product-badge-title"
     ).innerText;
@@ -202,21 +207,20 @@ const newPageLoad = async () => {
     document.querySelector(
       ".tab-product-info-wrapper .col-md-6:nth-child(2)"
     ).style.width = "38%";
+
     const createDevRyans = document.createElement("div");
     createDevRyans.className = "compare-product-info";
+    createDevRyans.setAttribute(
+      "style",
+      "display: inline-block; width: 315px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: 62.5vh;"
+    );
     createDevRyans.innerHTML = ryansInnerHTML;
+
     document.querySelector(".row").appendChild(createDevRyans);
     document
       .querySelector(".tab-product-info-wrapper > .container")
       .firstElementChild.appendChild(createDevRyans);
 
-    const styleDiv = document.querySelector(".compare-product-info").style;
-    styleDiv.display = "inline-block";
-    styleDiv.width = "320px";
-    styleDiv.backgroundColor = "#26ACD5";
-    styleDiv.padding = "0 10px";
-    styleDiv.color = "white";
-    styleDiv.height = "62.5vh";
     const productName = document.querySelector(".title").innerText;
     let pagination = 1;
     let limit = 10;
@@ -286,24 +290,20 @@ const newPageLoad = async () => {
     document.querySelector(".basic").style.flexWrap = "unset";
     document
       .querySelector(".product-details-summary .col-md-5")
-      .setAttribute("style", "width: 31%; flex: unset;");
+      .setAttribute("style", "width: 28%; flex: unset;");
     document
       .querySelector(".product-details-summary .col-md-7")
-      .setAttribute("style", "width: 50%; flex: unset;");
+      .setAttribute("style", "width: 48%; flex: unset;");
     const createDevStartech = document.createElement("div");
     createDevStartech.className = "compare-product-info";
     createDevStartech.innerHTML = startechInnerHTML;
+    createDevStartech.setAttribute(
+      "style",
+      "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; color: white; height: 62.5vh;"
+    );
     document
       .querySelector(".product-details-summary > .container")
       .lastElementChild.appendChild(createDevStartech);
-    const styleDiv = document.querySelector(".compare-product-info").style;
-    styleDiv.display = "inline-block";
-    styleDiv.width = "315px";
-    styleDiv.backgroundColor = "#26ACD5";
-    styleDiv.padding = "0 10px";
-    styleDiv.color = "white";
-    styleDiv.height = "62.5vh";
-
     const productName = document.querySelector(".product-name").innerText;
     let pagination = 1;
     let limit = 10;
@@ -371,18 +371,14 @@ const newPageLoad = async () => {
     document.querySelector(".column").style.width = "57%";
     document.querySelector(".sidebar-additional").style.float = "left";
     // document.querySelector(".columns > .column > .media").style.width = "30%";
-
     const createDevPickaboo = document.createElement("div");
     createDevPickaboo.className = "compare-product-info";
+    createDevPickaboo.setAttribute(
+      "style",
+      "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; color: white; height: 62vh;"
+    );
     createDevPickaboo.innerHTML = pickabooInnerHTML;
     document.querySelector(".columns ").appendChild(createDevPickaboo);
-    const styleDiv = document.querySelector(".compare-product-info").style;
-    styleDiv.display = "inline-block";
-    styleDiv.width = "315px";
-    styleDiv.backgroundColor = "#26ACD5";
-    styleDiv.padding = "0 10px";
-    styleDiv.color = "white";
-    styleDiv.height = "62vh";
 
     const productName = document.querySelector(".base").innerText;
     let pagination = 1;
@@ -449,27 +445,25 @@ const newPageLoad = async () => {
   } else if (location.href.includes("othoba.com/")) {
     document.querySelector(".product-essential  .row").style.display = "flex";
     document.querySelector(".product-essential  .col-md-four").style.width =
-      "26%";
+      "23%";
     document.querySelector(".product-essential  .col-sm-six").style.width =
-      "37%";
+      "31%";
     document.querySelector(".product-essential  .divDeliveryInfo").style.width =
-      "35%";
+      "38%";
     document.querySelector(".product-essential  .col-md-eight").style.width =
       "unset";
 
     const createDevOthoba = document.createElement("div");
     createDevOthoba.className = "compare-product-info";
+    createDevOthoba.setAttribute(
+      "style",
+      "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; color: white; height: 61vh;"
+    );
     createDevOthoba.innerHTML = othobaInnerHTML;
+
     document
       .querySelector(".product-essential  .col-md-eight > .row ")
       .appendChild(createDevOthoba);
-    const styleDiv = document.querySelector(".compare-product-info").style;
-    styleDiv.display = "inline-block";
-    styleDiv.width = "315px";
-    styleDiv.backgroundColor = "#26ACD5";
-    styleDiv.padding = "0 10px";
-    styleDiv.color = "white";
-    styleDiv.height = "61vh";
 
     const productName = document.querySelector(".product-name  h1").innerText;
     let pagination = 1;
@@ -543,17 +537,13 @@ const newPageLoad = async () => {
     const createPriyoshop = document.createElement("div");
     createPriyoshop.className = "compare-product-info";
     createPriyoshop.innerHTML = priyoShopInnerHTML;
+    createPriyoshop.setAttribute(
+      "style",
+      "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; color: white; height: 62vh;"
+    );
     document
       .querySelector(".product-essential > :nth-child(2)")
       .after(createPriyoshop);
-    const styleDiv = document.querySelector(".compare-product-info").style;
-    styleDiv.display = "inline-block";
-    styleDiv.width = "315px";
-    styleDiv.backgroundColor = "#26ACD5";
-    styleDiv.padding = "0 10px";
-    styleDiv.color = "white";
-    styleDiv.height = "62.5vh";
-
     const productName = document.querySelector(".product-name").innerText;
     let pagination = 1;
     let limit = 10;
@@ -617,7 +607,83 @@ const newPageLoad = async () => {
     }
     createPriyoshop.innerHTML = priyoShopInnerHTML;
   } else if (location.href.includes("chaldal.com/")) {
-    document.querySelector(".lightboxContainer .lightbox").style.width =
-      "1100px !important";
+    document.querySelector(".product-detail-block .left").style.width = "30%";
+    document.querySelector(".product-detail-block .right").style.width = "43%";
+    const createChaldal = document.createElement("div");
+    createChaldal.className = "compare-product-info";
+    createChaldal.innerHTML = chaldalInnerHTML;
+    document
+      .querySelector(".product-detail-block .productDetails")
+      .appendChild(createChaldal);
+
+    document
+      .querySelector(".compare-product-info")
+      .setAttribute(
+        "style",
+        "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; margin-left: 1rem; color: white; height: 62.5vh;"
+      );
+
+    const productName = document.querySelector(".nameAndSubtext h1").innerText;
+    let pagination = 1;
+    let limit = 10;
+    const response = await fetch(
+      encodeURI(
+        `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
+      )
+    );
+    const { success, posts, total } = await response.json();
+    if (success) {
+      let totalProductCount = 0;
+      let similarProducts = "";
+      posts.forEach((post) => {
+        similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
+                               <div style="display: flex; padding: 5px; ">
+                                  <img src="${
+                                    post.image
+                                  }" style="width: 70px; object-fit: cover;">
+                                <div style="margin-left: 0.8rem;"> 
+                                  <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
+                                   href="${
+                                     post.link
+                                   }" target="_blank" style="line-height: 1.3rem; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
+          post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
+        }</a>
+                                  <p style="padding-bottom: 0.6rem; padding-top: 0.7rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
+                                  ">${post.price} TK  &nbsp;&nbsp;${
+          post.shop
+        }</p>
+                                  </div>
+                                </div>
+                            </div>`;
+      });
+      console.log(similarProducts);
+      chaldalInnerHTML = `<div>
+                          <h1 style="font-size: 1.5rem; margin: 0; padding: 10px 0;">
+                            Similar Products
+                          </h1>
+                          <p style="font-size: 1rem; padding-bottom: 0.6rem; color: #ffffff;">Showing ${
+                            limit * (pagination - 1) + 1
+                          } - ${
+        limit * pagination > totalProductCount
+          ? totalProductCount
+          : limit * pagination
+      } of total
+                          ${total} Products</p>
+                          <div style="height: 48.5vh; overflow: auto;" >
+                            ${similarProducts}
+                          </div>
+                          <div style="display: flex; justify-content: center; margin-bottom: 0.7rem;">
+                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
+                                cursor: pointer;">
+                                Previous
+                              </button>
+                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;  
+                                  background-color: #ffffff; color: #000000; cursor: pointer;">
+                                  Next
+                              </button>
+                          </div>
+                        </div>`;
+    }
+    createChaldal.innerHTML = chaldalInnerHTML;
   }
 };
