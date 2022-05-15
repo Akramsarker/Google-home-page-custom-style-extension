@@ -214,13 +214,14 @@ const newPageLoad = async () => {
       "style",
       "display: inline-block; width: 315px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: 62.5vh;"
     );
+
     createDevRyans.innerHTML = ryansInnerHTML;
 
     document.querySelector(".row").appendChild(createDevRyans);
     document
       .querySelector(".tab-product-info-wrapper > .container")
       .firstElementChild.appendChild(createDevRyans);
-
+    document.body.style.backgroundColor = "#26ACD5";
     const productName = document.querySelector(".title").innerText;
     let pagination = 1;
     let limit = 10;
@@ -622,7 +623,7 @@ const newPageLoad = async () => {
         "style",
         "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; margin-left: 1rem; color: white; height: 62.5vh;"
       );
-
+    document.querySelector(".lightbox").style.display = "none";
     const productName = document.querySelector(".nameAndSubtext h1").innerText;
     let pagination = 1;
     let limit = 10;
