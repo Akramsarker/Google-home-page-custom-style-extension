@@ -26,7 +26,7 @@ const newPageLoad = async () => {
                       </div>`;
 
   let startechInnerHTML = `<div>
-                          <h1 style="font-size: 1.5rem; margin: 0; padding: 10px 0;">
+                          <h1 style="font-size: 1.5rem; margin: 0; padding: 5px 0;">
                             Similar Products
                           </h1>
                             <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
@@ -40,10 +40,10 @@ const newPageLoad = async () => {
                       </div>`;
 
   let priyoShopInnerHTML = `<div>
-                            <h1 style="font-size: 1.5rem; color: #ffffff; margin: 0; padding: 10px 0;">
+                            <h1 style="font-size: 1.4rem; color: #ffffff; margin: 0; padding: 10px 0;">
                               Similar Products
                             </h1>
-                              <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
+                              <p style="font-size: 0.9rem; color: #ffffff;">Loading... </p>
                           </div>`;
 
   let pickabooInnerHTML = `<div>
@@ -68,7 +68,7 @@ const newPageLoad = async () => {
     createDev.setAttribute("class", "compare-product-info");
     createDev.setAttribute(
       "style",
-      "display: inline-block; width: 315px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: 60vh;"
+      "display: inline-block; width: 315px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: 61vh;"
     );
     createDev.innerHTML = darazInnerHTML;
     document.querySelector("#block-3FfF28kZyT").appendChild(createDev);
@@ -85,7 +85,6 @@ const newPageLoad = async () => {
     );
     const { success, posts, total } = await response.json();
     if (success) {
-      let totalProductCount = 0;
       let similarProducts = "";
       posts.forEach((post) => {
         similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
@@ -115,21 +114,17 @@ const newPageLoad = async () => {
                           </h1>
                           <p style="font-size: 1.2rem; padding-bottom: 0.8rem">Showing ${
                             limit * (pagination - 1) + 1
-                          } - ${
-        limit * pagination > totalProductCount
-          ? totalProductCount
-          : limit * pagination
-      } of total
+                          } - ${limit * pagination} of total
                           ${total} Products</p>
                           <div style="height: 48.5vh; overflow: auto;" >
                             ${similarProducts}
                           </div>
-                          <div style="display: flex; justify-content: center; margin-bottom: 0.7rem;">
-                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
+                          <div style="display: flex; justify-content: center; margin-bottom: 0.7rem; padding-top: 0.5rem">
+                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem; font-size: 1.2rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
                                 cursor: pointer;">
                                 Previous
                               </button>
-                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;
+                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; font-size: 1.2rem; border-radius: 0.3rem; border: 1px solid transparent;
                                   background-color: #ffffff; color: #000000; cursor: pointer;">
                                   Next
                               </button>
@@ -291,16 +286,16 @@ const newPageLoad = async () => {
     document.querySelector(".basic").style.flexWrap = "unset";
     document
       .querySelector(".product-details-summary .col-md-5")
-      .setAttribute("style", "width: 28%; flex: unset;");
+      .setAttribute("style", "width: 27%; flex: unset;");
     document
       .querySelector(".product-details-summary .col-md-7")
-      .setAttribute("style", "width: 48%; flex: unset;");
+      .setAttribute("style", "width: 47%; flex: unset;");
     const createDevStartech = document.createElement("div");
     createDevStartech.className = "compare-product-info";
     createDevStartech.innerHTML = startechInnerHTML;
     createDevStartech.setAttribute(
       "style",
-      "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; color: white; height: 62.5vh;"
+      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 62vh;"
     );
     document
       .querySelector(".product-details-summary > .container")
@@ -315,7 +310,6 @@ const newPageLoad = async () => {
     );
     const { success, posts, total } = await response.json();
     if (success) {
-      let totalProductCount = 0;
       let similarProducts = "";
       posts.forEach((post) => {
         similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
@@ -330,7 +324,7 @@ const newPageLoad = async () => {
                                    }" target="_blank" style="line-height: 1.3rem; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
         }</a>
-                                  <p style="padding-bottom: 0.6rem; padding-top: 0.7rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
+                                  <p style="padding-top: 0.5rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
                                   ">${post.price} TK  &nbsp;&nbsp;${
           post.shop
         }</p>
@@ -340,22 +334,18 @@ const newPageLoad = async () => {
       });
       console.log(similarProducts);
       startechInnerHTML = `<div>
-                          <h1 style="font-size: 1.5rem; margin: 0; padding: 10px 0;">
+                          <h1 style="font-size: 1.5rem; margin: 0; padding: 6px 0;">
                             Similar Products
                           </h1>
-                          <p style="font-size: 1rem; padding-bottom: 0.6rem; color: #ffffff;">Showing ${
+                          <p style="font-size: 1rem; padding-bottom: 0; color: #ffffff;">Showing ${
                             limit * (pagination - 1) + 1
-                          } - ${
-        limit * pagination > totalProductCount
-          ? totalProductCount
-          : limit * pagination
-      } of total
+                          } - ${limit * pagination} of total
                           ${total} Products</p>
                           <div style="height: 48.5vh; overflow: auto;" >
                             ${similarProducts}
                           </div>
-                          <div style="display: flex; justify-content: center; margin-bottom: 0.7rem;">
-                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
+                          <div style="display: flex; justify-content: center; padding: 0.6rem 0">
+                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem; background-color:  #ffffff; color: #000000; border: 1px solid transparent;
                                 cursor: pointer;">
                                 Previous
                               </button>
@@ -371,7 +361,6 @@ const newPageLoad = async () => {
     document.querySelector(".main-wrapper").style.maxWidth = "1445px";
     document.querySelector(".column").style.width = "57%";
     document.querySelector(".sidebar-additional").style.float = "left";
-    // document.querySelector(".columns > .column > .media").style.width = "30%";
     const createDevPickaboo = document.createElement("div");
     createDevPickaboo.className = "compare-product-info";
     createDevPickaboo.setAttribute(
@@ -391,7 +380,6 @@ const newPageLoad = async () => {
     );
     const { success, posts, total } = await response.json();
     if (success) {
-      let totalProductCount = 0;
       let similarProducts = "";
       posts.forEach((post) => {
         similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
@@ -403,7 +391,7 @@ const newPageLoad = async () => {
                                   <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
                                    href="${
                                      post.link
-                                   }" target="_blank" style="line-height: 1.5rem; font-size: 1.2rem; color: #ffffff; cursor: pointer;  ">${
+                                   }" target="_blank" style="line-height: 1.5rem; font-size: 1.5rem; color: #ffffff; cursor: pointer;  ">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
         }</a>
                                   <p style="padding-bottom: 0.7rem; padding-top: 1rem; text-transform: capitalize;
@@ -416,26 +404,22 @@ const newPageLoad = async () => {
       });
       console.log(similarProducts);
       pickabooInnerHTML = `<div>
-                          <h1 style="font-size: 2rem; color: #ffffff; margin: 0; padding: 10px 0;">
+                          <h1 style="font-size: 2.5rem; color: #ffffff; margin: 0; padding: 10px 0;">
                             Similar Products
                           </h1>
-                          <p style="font-size: 1.2rem; padding-bottom: 0.8rem">Showing ${
+                          <p style="font-size: 1.5rem; padding-bottom: 0">Showing ${
                             limit * (pagination - 1) + 1
-                          } - ${
-        limit * pagination > totalProductCount
-          ? totalProductCount
-          : limit * pagination
-      } of total
+                          } - ${limit * pagination} of total
                           ${total} Products</p>
                           <div style="height: 48.5vh; overflow: auto;" >
                             ${similarProducts}
                           </div>
-                          <div style="display: flex; justify-content: center; margin-bottom: 0.7rem;">
-                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; font-size: 1.1rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
+                          <div style="display: flex; justify-content: center; padding: 0.5rem 0;">
+                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; font-size: 1.2rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
                                 cursor: pointer;">
                                 Previous
                               </button>
-                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; font-size: 1.1rem; border-radius: 0.3rem; border: 1px solid transparent;
+                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; font-size: 1.2rem; border-radius: 0.3rem; border: 1px solid transparent;
                                   background-color: #ffffff; color: #000000; cursor: pointer;">
                                   Next
                               </button>
@@ -458,14 +442,13 @@ const newPageLoad = async () => {
     createDevOthoba.className = "compare-product-info";
     createDevOthoba.setAttribute(
       "style",
-      "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; color: white; height: 61vh;"
+      "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; color: white; height: 61.5vh;"
     );
     createDevOthoba.innerHTML = othobaInnerHTML;
 
     document
       .querySelector(".product-essential  .col-md-eight > .row ")
       .appendChild(createDevOthoba);
-
     const productName = document.querySelector(".product-name  h1").innerText;
     let pagination = 1;
     let limit = 10;
@@ -476,7 +459,6 @@ const newPageLoad = async () => {
     );
     const { success, posts, total } = await response.json();
     if (success) {
-      let totalProductCount = 0;
       let similarProducts = "";
       posts.forEach((post) => {
         similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
@@ -501,27 +483,23 @@ const newPageLoad = async () => {
       });
       console.log(similarProducts);
       othobaInnerHTML = `<div>
-                          <h1 style="font-size: 1.5rem; margin: 0; color: #ffffff; padding: 10px 0;">
+                          <h1 style="font-size: 1.4rem; margin: 0; color: #ffffff; padding: 9px 0;">
                             Similar Products
                           </h1>
-                          <p style="font-size: 1rem; padding-bottom: 0.6rem; color: #ffffff;">Showing ${
+                          <p style="font-size: 0.9rem; padding-bottom: 0.5rem; color: #ffffff;">Showing ${
                             limit * (pagination - 1) + 1
-                          } - ${
-        limit * pagination > totalProductCount
-          ? totalProductCount
-          : limit * pagination
-      } of total
+                          } - ${limit * pagination} of total
                           ${total} Products</p>
                           <div style="height: 48.5vh; overflow: auto;" >
                             ${similarProducts}
                           </div>
-                          <div style="display: flex; justify-content: center; margin-bottom: 0.7rem;">
-                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
+                          <div style="display: flex; justify-content: center; padding: 0.5rem;">
+                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background:  #ffffff; font-size: 0.9rem; color: #000000; border: 1px solid transparent;
                                 cursor: pointer;">
                                 Previous
                               </button>
                               <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;  
-                                  background-color: #ffffff; color: #000000; cursor: pointer;">
+                                  background: #ffffff; font-size: 0.9rem; color: #000000; cursor: pointer;">
                                   Next
                               </button>
                           </div>
@@ -555,7 +533,6 @@ const newPageLoad = async () => {
     );
     const { success, posts, total } = await response.json();
     if (success) {
-      let totalProductCount = 0;
       let similarProducts = "";
       posts.forEach((post) => {
         similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
@@ -570,7 +547,7 @@ const newPageLoad = async () => {
                                    }" target="_blank" style="line-height: 1.3rem; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
         }</a>
-                                  <p style="padding-bottom: 0.6rem; padding-top: 0.7rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
+                                  <p style="padding-bottom: 0.5rem; padding-top: 0.6rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
                                   ">${post.price} TK  &nbsp;&nbsp;${
           post.shop
         }</p>
@@ -580,21 +557,17 @@ const newPageLoad = async () => {
       });
       console.log(similarProducts);
       priyoShopInnerHTML = `<div>
-                          <h1 style="font-size: 1.5rem; margin: 0; padding: 10px 0;">
+                          <h1 style="font-size: 1.4rem; margin: 0; padding: 7px 0;">
                             Similar Products
                           </h1>
-                          <p style="font-size: 1rem; padding-bottom: 0.6rem; color: #ffffff;">Showing ${
+                          <p style="font-size: 0.9rem; padding-bottom: 0.5rem; color: #ffffff;">Showing ${
                             limit * (pagination - 1) + 1
-                          } - ${
-        limit * pagination > totalProductCount
-          ? totalProductCount
-          : limit * pagination
-      } of total
+                          } - ${limit * pagination} of total
                           ${total} Products</p>
                           <div style="height: 48.5vh; overflow: auto;" >
                             ${similarProducts}
                           </div>
-                          <div style="display: flex; justify-content: center; margin-bottom: 0.7rem;">
+                          <div style="display: flex; justify-content: center; margin-bottom: 0.7rem; padding-top: 0.5rem;">
                               <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
                                 cursor: pointer;">
                                 Previous
@@ -621,9 +594,8 @@ const newPageLoad = async () => {
       .querySelector(".compare-product-info")
       .setAttribute(
         "style",
-        "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; margin-left: 1rem; color: white; height: 62.5vh;"
+        "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; margin-left: 1rem; color: white; height: 62vh;"
       );
-    document.querySelector(".lightbox").style.display = "none";
     const productName = document.querySelector(".nameAndSubtext h1").innerText;
     let pagination = 1;
     let limit = 10;
@@ -634,7 +606,6 @@ const newPageLoad = async () => {
     );
     const { success, posts, total } = await response.json();
     if (success) {
-      let totalProductCount = 0;
       let similarProducts = "";
       posts.forEach((post) => {
         similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
@@ -646,7 +617,7 @@ const newPageLoad = async () => {
                                   <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
                                    href="${
                                      post.link
-                                   }" target="_blank" style="line-height: 1.3rem; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
+                                   }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
         }</a>
                                   <p style="padding-bottom: 0.6rem; padding-top: 0.7rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
@@ -657,23 +628,18 @@ const newPageLoad = async () => {
                                 </div>
                             </div>`;
       });
-      console.log(similarProducts);
       chaldalInnerHTML = `<div>
                           <h1 style="font-size: 1.5rem; margin: 0; padding: 10px 0;">
                             Similar Products
                           </h1>
                           <p style="font-size: 1rem; padding-bottom: 0.6rem; color: #ffffff;">Showing ${
                             limit * (pagination - 1) + 1
-                          } - ${
-        limit * pagination > totalProductCount
-          ? totalProductCount
-          : limit * pagination
-      } of total
+                          } - ${limit * pagination} of total
                           ${total} Products</p>
                           <div style="height: 48.5vh; overflow: auto;" >
                             ${similarProducts}
                           </div>
-                          <div style="display: flex; justify-content: center; margin-bottom: 0.7rem;">
+                          <div style="display: flex; justify-content: center; padding: 0.5rem 0;">
                               <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
                                 cursor: pointer;">
                                 Previous
