@@ -211,7 +211,6 @@ const newPageLoad = async () => {
     );
 
     createDevRyans.innerHTML = ryansInnerHTML;
-
     document.querySelector(".row").appendChild(createDevRyans);
     document
       .querySelector(".tab-product-info-wrapper > .container")
@@ -359,13 +358,13 @@ const newPageLoad = async () => {
     createDevStartech.innerHTML = startechInnerHTML;
   } else if (location.href.includes("pickaboo.com/")) {
     document.querySelector(".main-wrapper").style.maxWidth = "1445px";
-    document.querySelector(".column").style.width = "57%";
+    document.querySelector(".column").style.width = "55%";
     document.querySelector(".sidebar-additional").style.float = "left";
     const createDevPickaboo = document.createElement("div");
     createDevPickaboo.className = "compare-product-info";
     createDevPickaboo.setAttribute(
       "style",
-      "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; color: white; height: 62vh;"
+      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 62vh;"
     );
     createDevPickaboo.innerHTML = pickabooInnerHTML;
     document.querySelector(".columns ").appendChild(createDevPickaboo);
@@ -442,7 +441,7 @@ const newPageLoad = async () => {
     createDevOthoba.className = "compare-product-info";
     createDevOthoba.setAttribute(
       "style",
-      "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; color: white; height: 61.5vh;"
+      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 61.5vh;"
     );
     createDevOthoba.innerHTML = othobaInnerHTML;
 
@@ -508,17 +507,17 @@ const newPageLoad = async () => {
     createDevOthoba.innerHTML = othobaInnerHTML;
   } else if (location.href.includes("priyoshop.com/")) {
     document.querySelector(".product-essential");
-    document.querySelector(".details-picture-wrapper").style.width = "28%";
+    document.querySelector(".details-picture-wrapper").style.width = "26%";
     document
       .querySelector(".product-essential  .overview")
-      .setAttribute("style", "width: 45%; float: left; margin-left: 1rem;");
+      .setAttribute("style", "width: 43%; float: left; margin-left: 1rem;");
 
     const createPriyoshop = document.createElement("div");
     createPriyoshop.className = "compare-product-info";
     createPriyoshop.innerHTML = priyoShopInnerHTML;
     createPriyoshop.setAttribute(
       "style",
-      "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; color: white; height: 62vh;"
+      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 62vh;"
     );
     document
       .querySelector(".product-essential > :nth-child(2)")
@@ -582,7 +581,7 @@ const newPageLoad = async () => {
     createPriyoshop.innerHTML = priyoShopInnerHTML;
   } else if (location.href.includes("chaldal.com/")) {
     document.querySelector(".product-detail-block .left").style.width = "30%";
-    document.querySelector(".product-detail-block .right").style.width = "43%";
+    document.querySelector(".product-detail-block .right").style.width = "42%";
     const createChaldal = document.createElement("div");
     createChaldal.className = "compare-product-info";
     createChaldal.innerHTML = chaldalInnerHTML;
@@ -594,7 +593,7 @@ const newPageLoad = async () => {
       .querySelector(".compare-product-info")
       .setAttribute(
         "style",
-        "display: inline-block; width: 315px; background-color: #26ACD5; padding: 0 10px; margin-left: 1rem; color: white; height: 62vh;"
+        "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; margin-left: 1rem; color: white; height: 62vh;"
       );
     const productName = document.querySelector(".nameAndSubtext h1").innerText;
     let pagination = 1;
