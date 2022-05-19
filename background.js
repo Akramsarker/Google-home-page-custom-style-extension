@@ -441,7 +441,7 @@ const newPageLoad = async () => {
     createDevOthoba.className = "compare-product-info";
     createDevOthoba.setAttribute(
       "style",
-      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 61.5vh;"
+      "display: inline-block; width: 335px; background-color: #26ACD5; padding: 0 10px; color: white; height: 61.5vh;"
     );
     createDevOthoba.innerHTML = othobaInnerHTML;
 
@@ -595,6 +595,32 @@ const newPageLoad = async () => {
         "style",
         "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; margin-left: 1rem; color: white; height: 62vh;"
       );
+    let loopCounter = 0;
+    setInterval(myCallback, 1000);
+    function myCallback() {
+      console.log("looped", loopCounter);
+      if (document.querySelector(".lightbox")) {
+        if (loopCounter >= 1) return;
+        document.querySelector(".left").style.width = "28%";
+        document.querySelector(".right").style.width = "39%";
+        const createChaldal = document.createElement("div");
+        createChaldal.className = "compare-product-info";
+        createChaldal.innerHTML = chaldalInnerHTML;
+        document
+          .querySelector(".lightbox .productDetails")
+          .appendChild(createChaldal);
+        document
+          .querySelector(".compare-product-info")
+          .setAttribute(
+            "style",
+            "display: inline-block; width: 290px; background-color: #26ACD5; margin-top: 2rem; margin-left: 1rem; padding: 0 10px; color: white; height: 62vh;"
+          );
+        createChaldal.innerHTML = chaldalInnerHTML;
+        loopCounter++;
+      } else {
+        loopCounter = 0;
+      }
+    }
     const productName = document.querySelector(".nameAndSubtext h1").innerText;
     let pagination = 1;
     let limit = 10;
