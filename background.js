@@ -8,7 +8,7 @@ chrome.webNavigation.onCompleted.addListener(({ tabId, frameId }) => {
 });
 
 const newPageLoad = async () => {
-  let darazInnerHTML = `<div>
+  let darazInnerHTML = `<div style="height: 62vh">
                           <h1 style="font-size: 2rem; margin: 0; padding: 10px 0;">
                             Similar Products
                           </h1>
@@ -25,35 +25,35 @@ const newPageLoad = async () => {
                         </div>
                       </div>`;
 
-  let startechInnerHTML = `<div>
+  let startechInnerHTML = `<div style="height: 62vh">
                           <h1 style="font-size: 1.5rem; margin: 0; padding: 5px 0;">
                             Similar Products
                           </h1>
                             <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
                         </div>`;
 
-  let othobaInnerHTML = `<div>
+  let othobaInnerHTML = `<div style="height: 61.5vh">
                         <h1 style="font-size: 1.5rem; color: #ffffff; margin: 0; padding: 10px 0;">
                           Similar Products
                         </h1>
                           <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
                       </div>`;
 
-  let priyoShopInnerHTML = `<div>
+  let priyoShopInnerHTML = `<div style="height: 62vh">
                             <h1 style="font-size: 1.4rem; color: #ffffff; margin: 0; padding: 10px 0;">
                               Similar Products
                             </h1>
                               <p style="font-size: 0.9rem; color: #ffffff;">Loading... </p>
                           </div>`;
 
-  let pickabooInnerHTML = `<div>
+  let pickabooInnerHTML = `<div style="height: 62vh">
                           <h1 style="font-size: 2rem; color: #ffffff; margin: 0; padding: 10px 0;">
                             Similar Products
                           </h1>
                             <p style="font-size: 1.5rem; color: #ffffff;">Loading... </p>
                         </div>`;
 
-  let chaldalInnerHTML = `<div>
+  let chaldalInnerHTML = `<div style="height: 62vh">
                               <h1 style="font-size: 1.5rem; color: #ffffff; margin: 0; padding: 10px 0;">
                                 Similar Products
                               </h1>
@@ -61,14 +61,16 @@ const newPageLoad = async () => {
                           </div>`;
 
   if (location.href.includes("/products")) {
-    document.querySelector("#root").style.width = "1500px";
+    document.querySelector("#root").style.width = "1380px";
     document.querySelector(".pdp-block__product-detail").style.width =
       "calc(100% - 665px)";
+    document.querySelector(".pdp-block__main-information-detail").style.width =
+      "calc(100% - 340px)";
     const createDev = document.createElement("div");
     createDev.setAttribute("class", "compare-product-info");
     createDev.setAttribute(
       "style",
-      "display: inline-block; width: 315px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: 61vh;"
+      "display: inline-block; width: 315px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: auto; @media (max-width:1430px){display: none;}"
     );
     createDev.innerHTML = darazInnerHTML;
     document.querySelector("#block-3FfF28kZyT").appendChild(createDev);
@@ -294,7 +296,7 @@ const newPageLoad = async () => {
     createDevStartech.innerHTML = startechInnerHTML;
     createDevStartech.setAttribute(
       "style",
-      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 62vh;"
+      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 100%;"
     );
     document
       .querySelector(".product-details-summary > .container")
@@ -364,7 +366,7 @@ const newPageLoad = async () => {
     createDevPickaboo.className = "compare-product-info";
     createDevPickaboo.setAttribute(
       "style",
-      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 62vh;"
+      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 100%;"
     );
     createDevPickaboo.innerHTML = pickabooInnerHTML;
     document.querySelector(".columns ").appendChild(createDevPickaboo);
@@ -441,7 +443,7 @@ const newPageLoad = async () => {
     createDevOthoba.className = "compare-product-info";
     createDevOthoba.setAttribute(
       "style",
-      "display: inline-block; width: 335px; background-color: #26ACD5; padding: 0 10px; color: white; height: 61.5vh;"
+      "display: inline-block; width: 335px; background-color: #26ACD5; padding: 0 10px; color: white; height: 100%;"
     );
     createDevOthoba.innerHTML = othobaInnerHTML;
 
@@ -517,7 +519,7 @@ const newPageLoad = async () => {
     createPriyoshop.innerHTML = priyoShopInnerHTML;
     createPriyoshop.setAttribute(
       "style",
-      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 62vh;"
+      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 100%;"
     );
     document
       .querySelector(".product-essential > :nth-child(2)")
@@ -613,9 +615,9 @@ const newPageLoad = async () => {
           .querySelector(".compare-product-info")
           .setAttribute(
             "style",
-            "display: inline-block; width: 290px; background-color: #26ACD5; margin-top: 2rem; margin-left: 1rem; padding: 0 10px; color: white; height: 62vh;"
+            "display: inline-block; width: 290px; background-color: #26ACD5; margin-top: 2rem; margin-left: 1rem; padding: 0 10px; color: white; height: 100%;"
           );
-        createChaldal.innerHTML = chaldalInnerHTML;
+        // createChaldal.innerHTML = chaldalInnerHTML;
         loopCounter++;
       } else {
         loopCounter = 0;
