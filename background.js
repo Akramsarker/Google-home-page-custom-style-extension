@@ -217,7 +217,8 @@ const newPageLoad = async () => {
     document
       .querySelector(".tab-product-info-wrapper > .container")
       .firstElementChild.appendChild(createDevRyans);
-    document.body.style.backgroundColor = "#26ACD5";
+
+    document.body.innerText = "Hello world from Ryans";
     const productName = document.querySelector(".title").innerText;
     let pagination = 1;
     let limit = 10;
@@ -291,6 +292,10 @@ const newPageLoad = async () => {
     document
       .querySelector(".product-details-summary .col-md-7")
       .setAttribute("style", "width: 47%; flex: unset;");
+
+    document.querySelector(
+      ".product-details .product-images .thumbnail .main-img"
+    ).style.maxWidth = "300px";
     const createDevStartech = document.createElement("div");
     createDevStartech.className = "compare-product-info";
     createDevStartech.innerHTML = startechInnerHTML;
@@ -519,7 +524,7 @@ const newPageLoad = async () => {
     createPriyoshop.innerHTML = priyoShopInnerHTML;
     createPriyoshop.setAttribute(
       "style",
-      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 100%;"
+      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 100%; @media (max-width:1430px){display: none !important}"
     );
     document
       .querySelector(".product-essential > :nth-child(2)")
