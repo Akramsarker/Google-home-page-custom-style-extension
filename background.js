@@ -60,6 +60,13 @@ const newPageLoad = async () => {
                                 <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
                           </div>`;
 
+  let chaldalModalInnerHTML = `<div style="height: 62vh">
+                            <h1 style="font-size: 1.5rem; color: #ffffff; margin: 0; padding: 10px 0;">
+                              Similar Products
+                            </h1>
+                              <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
+                          </div>`;
+
   if (location.href.includes("/products")) {
     document.querySelector("#root").style.width = "1380px";
     document.querySelector(".pdp-block__product-detail").style.width =
@@ -211,6 +218,7 @@ const newPageLoad = async () => {
       "style",
       "display: inline-block; width: 315px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: 62.5vh;"
     );
+    document.body.innerText = "Hello world from Ryans";
 
     createDevRyans.innerHTML = ryansInnerHTML;
     document.querySelector(".row").appendChild(createDevRyans);
@@ -218,7 +226,6 @@ const newPageLoad = async () => {
       .querySelector(".tab-product-info-wrapper > .container")
       .firstElementChild.appendChild(createDevRyans);
 
-    document.body.innerText = "Hello world from Ryans";
     const productName = document.querySelector(".title").innerText;
     let pagination = 1;
     let limit = 10;
@@ -561,7 +568,6 @@ const newPageLoad = async () => {
                                 </div>
                             </div>`;
       });
-      console.log(similarProducts);
       priyoShopInnerHTML = `<div>
                           <h1 style="font-size: 1.4rem; margin: 0; padding: 7px 0;">
                             Similar Products
@@ -578,7 +584,7 @@ const newPageLoad = async () => {
                                 cursor: pointer;">
                                 Previous
                               </button>
-                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;  
+                              <button onClick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;  
                                   background-color: #ffffff; color: #000000; cursor: pointer;">
                                   Next
                               </button>
@@ -586,6 +592,62 @@ const newPageLoad = async () => {
                         </div>`;
     }
     createPriyoshop.innerHTML = priyoShopInnerHTML;
+    async function fetchNextProducts() {
+      pagination++;
+      const response = await fetch(
+        encodeURI(
+          `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
+        )
+      );
+      const { success, posts, total } = await response.json();
+      if (success) {
+        let similarProducts = "";
+        posts.forEach((post) => {
+          similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
+                                <div style="display: flex; padding: 5px; ">
+                                  <img src="${
+                                    post.image
+                                  }" style="width: 70px; object-fit: cover;">
+                                <div style="margin-left: 0.8rem;"> 
+                                  <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
+                                    href="${
+                                      post.link
+                                    }" target="_blank" style="line-height: 1.3rem; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
+            post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
+          }</a>
+                                  <p style="padding-bottom: 0.5rem; padding-top: 0.6rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
+                                  ">${post.price} TK  &nbsp;&nbsp;${
+            post.shop
+          }</p>
+                                  </div>
+                                </div>
+                        </div>`;
+        });
+        priyoShopInnerHTML = `<div>
+                                  <h1 style="font-size: 1.4rem; margin: 0; padding: 7px 0;">
+                                  Similar Products
+                                </h1>
+                                <p style="font-size: 0.9rem; padding-bottom: 0.5rem; color: #ffffff;">Showing ${
+                                  limit * (pagination - 1) + 1
+                                } - ${limit * pagination} of total
+                                ${total} Products</p>
+                                <div style="height: 48.5vh; overflow: auto;" >
+                                  ${similarProducts}
+                            </div>
+                                  <div style="display: flex; justify-content: center; margin-bottom: 0.7rem; padding-top: 0.5rem;">
+                                  <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
+                                    cursor: pointer;">
+                                    Previous
+                                  </button>
+                                  <button onClick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;  
+                                      background-color: #ffffff; color: #000000; cursor: pointer;">
+                                      Next
+                                  </button>
+                              </div>
+                          </div>`;
+      }
+      createPriyoshop.innerHTML = priyoShopInnerHTML;
+    }
   } else if (location.href.includes("chaldal.com/")) {
     document.querySelector(".product-detail-block .left").style.width = "30%";
     document.querySelector(".product-detail-block .right").style.width = "42%";
@@ -602,32 +664,7 @@ const newPageLoad = async () => {
         "style",
         "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; margin-left: 1rem; color: white; height: 62vh;"
       );
-    let loopCounter = 0;
-    setInterval(myCallback, 1000);
-    function myCallback() {
-      console.log("looped", loopCounter);
-      if (document.querySelector(".lightbox")) {
-        if (loopCounter >= 1) return;
-        document.querySelector(".left").style.width = "28%";
-        document.querySelector(".right").style.width = "39%";
-        const createChaldal = document.createElement("div");
-        createChaldal.className = "compare-product-info";
-        createChaldal.innerHTML = chaldalInnerHTML;
-        document
-          .querySelector(".lightbox .productDetails")
-          .appendChild(createChaldal);
-        document
-          .querySelector(".compare-product-info")
-          .setAttribute(
-            "style",
-            "display: inline-block; width: 290px; background-color: #26ACD5; margin-top: 2rem; margin-left: 1rem; padding: 0 10px; color: white; height: 100%;"
-          );
-        // createChaldal.innerHTML = chaldalInnerHTML;
-        loopCounter++;
-      } else {
-        loopCounter = 0;
-      }
-    }
+
     const productName = document.querySelector(".nameAndSubtext h1").innerText;
     let pagination = 1;
     let limit = 10;
@@ -684,5 +721,90 @@ const newPageLoad = async () => {
                         </div>`;
     }
     createChaldal.innerHTML = chaldalInnerHTML;
+    let loopCounter = 0;
+    setInterval(myCallback, 5000);
+    async function myCallback() {
+      console.log("looped", loopCounter);
+      if (document.querySelector(".lightbox")) {
+        if (loopCounter >= 1) return;
+        document.querySelector(".left").style.width = "28%";
+        document.querySelector(".right").style.width = "39%";
+        const createChaldal = document.createElement("div");
+        createChaldal.className = "compare-product-info";
+        createChaldal.innerHTML = chaldalModalInnerHTML;
+        document
+          .querySelector(".lightbox .productDetails")
+          .appendChild(createChaldal);
+        document
+          .querySelector(".compare-product-info")
+          .setAttribute(
+            "style",
+            "display: inline-block; width: 290px; background-color: #26ACD5; margin-top: 2rem; margin-left: 1rem; padding: 0 10px; color: white; height: 100%;"
+          );
+
+        const productName =
+          document.querySelector(".nameAndSubtext h1").innerText;
+        let pagination = 1;
+        let limit = 10;
+        const response = await fetch(
+          encodeURI(
+            `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
+          )
+        );
+        const { success, posts, total } = await response.json();
+        if (success) {
+          let similarProducts = "";
+          posts.forEach((post) => {
+            similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
+                               <div style="display: flex; padding: 5px; ">
+                                  <img src="${
+                                    post.image
+                                  }" style="width: 70px; object-fit: cover;">
+                                <div style="margin-left: 0.8rem;">
+                                  <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
+                                   href="${
+                                     post.link
+                                   }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
+              post.title.length > 50
+                ? post.title.slice(0, 50) + "…"
+                : post.title
+            }</a>
+                                  <p style="padding-bottom: 0.6rem; padding-top: 0.7rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
+                                  ">${post.price} TK  &nbsp;&nbsp;${
+              post.shop
+            }</p>
+                                  </div>
+                                </div>
+                            </div>`;
+          });
+          chaldalModalInnerHTML = `<div>
+                          <h1 style="font-size: 1.5rem; margin: 0; padding: 10px 0;">
+                            Similar Products
+                          </h1>
+                          <p style="font-size: 1rem; padding-bottom: 0.6rem; color: #ffffff;">Showing ${
+                            limit * (pagination - 1) + 1
+                          } - ${limit * pagination} of total
+                          ${total} Products</p>
+                          <div style="height: 48.5vh; overflow: auto;" >
+                            ${similarProducts}
+                          </div>
+                          <div style="display: flex; justify-content: center; padding: 0.5rem 0;">
+                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
+                                cursor: pointer;">
+                                Previous
+                              </button>
+                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;
+                                  background-color: #ffffff; color: #000000; cursor: pointer;">
+                                  Next
+                              </button>
+                          </div>
+                        </div>`;
+        }
+        createChaldal.innerHTML = chaldalModalInnerHTML;
+        loopCounter++;
+      } else {
+        loopCounter = 0;
+      }
+    }
   }
 };
