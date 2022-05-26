@@ -218,8 +218,6 @@ const newPageLoad = async () => {
       "style",
       "display: inline-block; width: 315px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: 62.5vh;"
     );
-    document.body.innerText = "Hello world from Ryans";
-
     createDevRyans.innerHTML = ryansInnerHTML;
     document.querySelector(".row").appendChild(createDevRyans);
     document
@@ -664,7 +662,6 @@ const newPageLoad = async () => {
         "style",
         "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; margin-left: 1rem; color: white; height: 62vh;"
       );
-
     const productName = document.querySelector(".nameAndSubtext h1").innerText;
     let pagination = 1;
     let limit = 10;
