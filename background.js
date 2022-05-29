@@ -2,7 +2,9 @@ chrome.webNavigation.onCompleted.addListener(({ tabId, frameId }) => {
   if (frameId !== 0) return;
   console.log(tabId, frameId);
   chrome.scripting.executeScript({
-    target: { tabId },
+    target: {
+      tabId,
+    },
     function: newPageLoad,
   });
 });
@@ -16,14 +18,12 @@ const newPageLoad = async () => {
                             <h3>Loading... </h3>
                           </div>
                         </div>`;
-  let ryansInnerHTML = `<div >
-                        <h1 style="font-size: 1.5rem; margin: 0; padding: 10px 0;">
-                          Similar Products
-                        </h1>
-                        <div style="font-size: 1rem">
-                          <p>Loading... </p>
-                        </div>
-                      </div>`;
+  let ryansInnerHTML = `<div style="height: 62vh">
+                          <h1 style="font-size: 1.5rem; margin: 0; padding: 5px 0;">
+                            Similar Products
+                          </h1>
+                            <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
+                        </div>`;
 
   let startechInnerHTML = `<div style="height: 62vh">
                           <h1 style="font-size: 1.5rem; margin: 0; padding: 5px 0;">
@@ -204,27 +204,24 @@ const newPageLoad = async () => {
     }
   } else if (location.href.includes("ryanscomputers.com/")) {
     document.querySelector(
-      ".tab-product-info-wrapper > .container"
-    ).style.width = "1400px";
-    document.querySelector(".tab-product-info-wrapper .col-md-6").style.width =
-      "39%";
+      ".product-info-section .image-detail-column"
+    ).style.width = "39%";
     document.querySelector(
-      ".tab-product-info-wrapper .col-md-6:nth-child(2)"
+      ".product-info-section .info-detail-column"
     ).style.width = "38%";
 
     const createDevRyans = document.createElement("div");
     createDevRyans.className = "compare-product-info";
     createDevRyans.setAttribute(
       "style",
-      "display: inline-block; width: 315px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: 62.5vh;"
+      "display: inline-block; width: 340px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: 62.5vh;"
     );
-    createDevRyans.innerHTML = ryansInnerHTML;
-    document.querySelector(".row").appendChild(createDevRyans);
-    document
-      .querySelector(".tab-product-info-wrapper > .container")
-      .firstElementChild.appendChild(createDevRyans);
 
-    const productName = document.querySelector(".title").innerText;
+    createDevRyans.innerHTML = ryansInnerHTML;
+    document
+      .querySelector(".product-info-section .container .g-2")
+      .appendChild(createDevRyans);
+    const productName = document.querySelector(".product_content h2").innerText;
     let pagination = 1;
     let limit = 10;
     const response = await fetch(
@@ -234,56 +231,51 @@ const newPageLoad = async () => {
     );
     const { success, posts, total } = await response.json();
     if (success) {
-      let totalProductCount = 0;
       let similarProducts = "";
       posts.forEach((post) => {
-        similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
-                               <div style="display: flex; padding: 5px; ">
+        similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem;     borderRadius: 10px;">
+                                <div style="display: flex; padding: 5px; ">
                                   <img src="${
                                     post.image
                                   }" style="width: 70px; object-fit: cover;">
                                 <div style="margin-left: 0.8rem;"> 
                                   <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
-                                   href="${
-                                     post.link
-                                   }" target="_blank" style="line-height: 1.3rem; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
+                                    href="${
+                                      post.link
+                                    }" target="_blank" style="line-height: 1.3rem; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
         }</a>
-                                  <p style="padding-bottom: 0.6rem; padding-top: 0.8rem; text-transform: capitalize;
+                                  <p style="padding:0.6rem 0 0 0; font-size: 0.8rem; text-transform: capitalize;
                                   ">${post.price} TK  &nbsp;&nbsp;${
           post.shop
         }</p>
                                   </div>
                                 </div>
-                            </div>`;
+                         </div>`;
       });
       console.log(similarProducts);
       ryansInnerHTML = `<div>
-                          <h1 style="font-size: 1.5rem; margin: 0; padding: 10px 0;">
-                            Similar Products
-                          </h1>
-                          <p style="font-size: 1rem; padding-bottom: 0.7rem">Showing ${
-                            limit * (pagination - 1) + 1
-                          } - ${
-        limit * pagination > totalProductCount
-          ? totalProductCount
-          : limit * pagination
-      } of total
-                          ${total} Products</p>
-                          <div style="height: 48.5vh; overflow: auto;" >
-                            ${similarProducts}
-                          </div>
-                          <div style="display: flex; justify-content: center; margin-bottom: 0.7rem;">
-                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
-                                cursor: pointer;">
-                                Previous
-                              </button>
-                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;  
-                                  background-color: #ffffff; color: #000000; cursor: pointer;">
-                                  Next
-                              </button>
-                          </div>
-                        </div>`;
+                            <h1 style="font-size: 1.5rem; margin: 0; padding: 6px 0;">
+                              Similar Products
+                            </h1>
+                            <p style="font-size: 1rem; padding-bottom: 0; color: #ffffff;">Showing ${
+                              limit * (pagination - 1) + 1
+                            } - ${limit * pagination} of total
+                            ${total} Products</p>
+                            <div style="height: 48.5vh; overflow: auto;" >
+                              ${similarProducts}
+                            </div>
+                            <div style="display: flex; justify-content: center; padding: 0.6rem 0">
+                                <button onclick="fetchPreviousProducts()" style="padding: 0.3rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem; font-size: 0.9rem; background-color:  #ffffff; color: #000000; border: 1px solid transparent;
+                                  cursor: pointer;">
+                                  Previous
+                                </button>
+                                <button onclick="fetchNextProducts()" style="padding: 0.3rem 0.75rem; font-size: 0.9rem; border-radius: 0.3rem; border: 1px solid transparent;  
+                                    background-color: #ffffff; color: #000000; cursor: pointer;">
+                                    Next
+                                </button>
+                            </div>
+                          </div>`;
     }
     createDevRyans.innerHTML = ryansInnerHTML;
   } else if (location.href.includes("startech.com.bd/")) {
