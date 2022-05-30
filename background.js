@@ -266,11 +266,11 @@ const newPageLoad = async () => {
                               ${similarProducts}
                             </div>
                             <div style="display: flex; justify-content: center; padding: 0.6rem 0">
-                                <button onclick="fetchPreviousProducts()" style="padding: 0.3rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem; font-size: 0.9rem; background-color:  #ffffff; color: #000000; border: 1px solid transparent;
+                                <button onMouseOver="this.style.backgroundColor='#F69876'" onMouseOut="this.style.backgroundColor='#ffffff'" style="padding: 0.3rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem; font-size: 0.9rem; color: #000000; border: 1px solid transparent;
                                   cursor: pointer;">
                                   Previous
                                 </button>
-                                <button onclick="fetchNextProducts()" style="padding: 0.3rem 0.75rem; font-size: 0.9rem; border-radius: 0.3rem; border: 1px solid transparent;  
+                                <button onclick="this.innerText = 'Hello world'" style="padding: 0.3rem 0.75rem; font-size: 0.9rem; border-radius: 0.3rem; border: 1px solid transparent;  
                                     background-color: #ffffff; color: #000000; cursor: pointer;">
                                     Next
                                 </button>
@@ -788,8 +788,8 @@ const newPageLoad = async () => {
                               </button>
                           </div>
                         </div>`;
+          createChaldal.innerHTML = chaldalModalInnerHTML;
         }
-        createChaldal.innerHTML = chaldalModalInnerHTML;
         loopCounter++;
       } else {
         loopCounter = 0;
