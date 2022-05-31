@@ -11,17 +11,19 @@ chrome.webNavigation.onCompleted.addListener(({ tabId, frameId }) => {
 
 const newPageLoad = async () => {
   let darazInnerHTML = `<div style="height: 62vh">
-                          <h1 style="font-size: 2rem; margin: 0; padding: 10px 0;">
-                            Similar Products
-                          </h1>
+                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                            padding: 10px 0 6px 0;">
+                              Similar Products  
+                            </h1>
                           <div style="">
                             <h3>Loading... </h3>
                           </div>
                         </div>`;
   let ryansInnerHTML = `<div style="height: 62vh">
-                          <h1 style="font-size: 1.5rem; margin: 0; padding: 5px 0;">
-                            Similar Products
-                          </h1>
+                        <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                        padding: 10px 0 6px 0;">
+                          Similar Products  
+                        </h1>
                             <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
                         </div>`;
 
@@ -40,9 +42,10 @@ const newPageLoad = async () => {
                       </div>`;
 
   let priyoShopInnerHTML = `<div style="height: 62vh">
-                            <h1 style="font-size: 1.4rem; color: #ffffff; margin: 0; padding: 10px 0;">
-                              Similar Products
-                            </h1>
+                              <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                              padding: 10px 0 6px 0;">
+                                Similar Products  
+                              </h1>
                               <p style="font-size: 0.9rem; color: #ffffff;">Loading... </p>
                           </div>`;
 
@@ -192,7 +195,6 @@ const newPageLoad = async () => {
                           </div>`;
       }
     }
-
     async function fetchPreviousProducts() {
       pagination--;
       const response = await fetch(
@@ -208,13 +210,13 @@ const newPageLoad = async () => {
     ).style.width = "39%";
     document.querySelector(
       ".product-info-section .info-detail-column"
-    ).style.width = "38%";
+    ).style.width = "39%";
 
     const createDevRyans = document.createElement("div");
     createDevRyans.className = "compare-product-info";
     createDevRyans.setAttribute(
       "style",
-      "display: inline-block; width: 340px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: 62.5vh;"
+      "display: inline-block; width: 22%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
     );
 
     createDevRyans.innerHTML = ryansInnerHTML;
@@ -233,45 +235,55 @@ const newPageLoad = async () => {
     if (success) {
       let similarProducts = "";
       posts.forEach((post) => {
-        similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem;     borderRadius: 10px;">
-                                <div style="display: flex; padding: 5px; ">
+        similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
+                              <div style="display: flex; padding: 5px;">
                                   <img src="${
                                     post.image
                                   }" style="width: 70px; object-fit: cover;">
                                 <div style="margin-left: 0.8rem;"> 
-                                  <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
+                                  <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
                                     href="${
                                       post.link
-                                    }" target="_blank" style="line-height: 1.3rem; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
+                                    }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1rem; color: #4D0097; cursor: pointer;">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-        }</a>
-                                  <p style="padding:0.6rem 0 0 0; font-size: 0.8rem; text-transform: capitalize;
-                                  ">${post.price} TK  &nbsp;&nbsp;${
-          post.shop
-        }</p>
+        }</a>                     <div style="display: flex; align-items: center;">
+                                    <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
+                                    ">TK ${post.price}
+                                    </p>
+                                      <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
+                                        post.shop
+                                      }</p>
                                   </div>
-                                </div>
-                         </div>`;
+                              </div>
+                            </div>
+                          </div>`;
       });
-      console.log(similarProducts);
       ryansInnerHTML = `<div>
-                            <h1 style="font-size: 1.5rem; margin: 0; padding: 6px 0;">
+                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                            padding: 10px 0 6px 0;">
                               Similar Products
                             </h1>
-                            <p style="font-size: 1rem; padding-bottom: 0; color: #ffffff;">Showing ${
-                              limit * (pagination - 1) + 1
-                            } - ${limit * pagination} of total
-                            ${total} Products</p>
-                            <div style="height: 48.5vh; overflow: auto;" >
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
+                              <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
+                              ${total}</p>
+                              <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
+                                <option style="color: #000; value="opel">Default</option>
+                                <option style="color: #000; value="volvo">Low to High</option>
+                                <option style="color: #000; value="saab">High to Low</option>
+                              </select>
+                            </div>
+                            <div style="height: 51vh; overflow: auto;" >
                               ${similarProducts}
                             </div>
-                            <div style="display: flex; justify-content: center; padding: 0.6rem 0">
-                                <button onMouseOver="this.style.backgroundColor='#F69876'" onMouseOut="this.style.backgroundColor='#ffffff'" style="padding: 0.3rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem; font-size: 0.9rem; color: #000000; border: 1px solid transparent;
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0">
+                                <button style="font-size: 1.1rem; background: none; padding: 0; border: none; color: #ffffff;
                                   cursor: pointer;">
                                   Previous
                                 </button>
-                                <button onclick="this.innerText = 'Hello world'" style="padding: 0.3rem 0.75rem; font-size: 0.9rem; border-radius: 0.3rem; border: 1px solid transparent;  
-                                    background-color: #ffffff; color: #000000; cursor: pointer;">
+                                <p style="margin: 0; font-size: 1.1rem;">Result: ${
+                                  limit * (pagination - 1) + 1
+                                } - ${limit * pagination}</p>
+                                <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
                                     Next
                                 </button>
                             </div>
@@ -521,7 +533,7 @@ const newPageLoad = async () => {
     createPriyoshop.innerHTML = priyoShopInnerHTML;
     createPriyoshop.setAttribute(
       "style",
-      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 100%; @media (max-width:1430px){display: none !important}"
+      "display: inline-block; width: 22%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
     );
     document
       .querySelector(".product-essential > :nth-child(2)")
@@ -538,48 +550,59 @@ const newPageLoad = async () => {
     if (success) {
       let similarProducts = "";
       posts.forEach((post) => {
-        similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
-                               <div style="display: flex; padding: 5px; ">
+        similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
+                              <div style="display: flex; padding: 5px;">
                                   <img src="${
                                     post.image
                                   }" style="width: 70px; object-fit: cover;">
                                 <div style="margin-left: 0.8rem;"> 
-                                  <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
-                                   href="${
-                                     post.link
-                                   }" target="_blank" style="line-height: 1.3rem; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
+                                  <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
+                                    href="${
+                                      post.link
+                                    }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1rem; color: #4D0097; cursor: pointer;">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-        }</a>
-                                  <p style="padding-bottom: 0.5rem; padding-top: 0.6rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
-                                  ">${post.price} TK  &nbsp;&nbsp;${
-          post.shop
-        }</p>
+        }</a>                     <div style="display: flex; align-items: center;">
+                                    <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
+                                    ">TK ${post.price}
+                                    </p>
+                                      <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
+                                        post.shop
+                                      }</p>
                                   </div>
-                                </div>
-                            </div>`;
+                              </div>
+                            </div>
+                          </div>`;
       });
       priyoShopInnerHTML = `<div>
-                          <h1 style="font-size: 1.4rem; margin: 0; padding: 7px 0;">
-                            Similar Products
-                          </h1>
-                          <p style="font-size: 0.9rem; padding-bottom: 0.5rem; color: #ffffff;">Showing ${
-                            limit * (pagination - 1) + 1
-                          } - ${limit * pagination} of total
-                          ${total} Products</p>
-                          <div style="height: 48.5vh; overflow: auto;" >
-                            ${similarProducts}
-                          </div>
-                          <div style="display: flex; justify-content: center; margin-bottom: 0.7rem; padding-top: 0.5rem;">
-                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
-                                cursor: pointer;">
-                                Previous
-                              </button>
-                              <button onClick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;  
-                                  background-color: #ffffff; color: #000000; cursor: pointer;">
-                                  Next
-                              </button>
-                          </div>
-                        </div>`;
+                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                            padding: 10px 0 6px 0;">
+                              Similar Products
+                            </h1>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
+                              <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
+                              ${total}</p>
+                              <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
+                                <option style="color: #000; value="opel">Default</option>
+                                <option style="color: #000; value="volvo">Low to High</option>
+                                <option style="color: #000; value="saab">High to Low</option>
+                              </select>
+                            </div>
+                            <div style="height: 51vh; overflow: auto;" >
+                              ${similarProducts}
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0">
+                                <button style="font-size: 1.1rem; background: none; padding: 0; border: none; color: #ffffff;
+                                  cursor: pointer;">
+                                  Previous
+                                </button>
+                                <p style="margin: 0; font-size: 1.1rem;">Result: ${
+                                  limit * (pagination - 1) + 1
+                                } - ${limit * pagination}</p>
+                                <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
+                                    Next
+                                </button>
+                            </div>
+                          </div>`;
     }
     createPriyoshop.innerHTML = priyoShopInnerHTML;
     async function fetchNextProducts() {
