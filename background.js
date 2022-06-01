@@ -11,7 +11,7 @@ chrome.webNavigation.onCompleted.addListener(({ tabId, frameId }) => {
 
 const newPageLoad = async () => {
   let darazInnerHTML = `<div style="height: 62vh">
-                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                            <h1 style="font-size: 2rem; margin: 0; font-weight: 700;
                             padding: 10px 0 6px 0;">
                               Similar Products  
                             </h1>
@@ -28,9 +28,10 @@ const newPageLoad = async () => {
                         </div>`;
 
   let startechInnerHTML = `<div style="height: 62vh">
-                          <h1 style="font-size: 1.5rem; margin: 0; padding: 5px 0;">
-                            Similar Products
-                          </h1>
+                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                            padding: 10px 0 6px 0;">
+                              Similar Products  
+                            </h1>
                             <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
                         </div>`;
 
@@ -70,20 +71,20 @@ const newPageLoad = async () => {
                               <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
                           </div>`;
 
-  if (location.href.includes("/products")) {
+  if (location.href.includes("/products/")) {
     document.querySelector("#root").style.width = "1380px";
     document.querySelector(".pdp-block__product-detail").style.width =
-      "calc(100% - 665px)";
+      "calc(100% - 674px)";
     document.querySelector(".pdp-block__main-information-detail").style.width =
       "calc(100% - 340px)";
     const createDev = document.createElement("div");
     createDev.setAttribute("class", "compare-product-info");
     createDev.setAttribute(
       "style",
-      "display: inline-block; width: 315px; background-color: #26ACD5; color: #ffffff; padding: 0 10px; height: auto; @media (max-width:1430px){display: none;}"
+      "display: inline-block; width: 320px; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
     );
     createDev.innerHTML = darazInnerHTML;
-    document.querySelector("#block-3FfF28kZyT").appendChild(createDev);
+    document.querySelector("#block-7S7Xc8ZF40").appendChild(createDev);
 
     const productName = document.querySelector(
       ".pdp-mod-product-badge-title"
@@ -99,49 +100,59 @@ const newPageLoad = async () => {
     if (success) {
       let similarProducts = "";
       posts.forEach((post) => {
-        similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
-                               <div style="display: flex; padding: 5px; ">
+        similarProducts += `<div style="margin-bottom: 0.8rem; margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
+                              <div style="display: flex; padding: 5px;">
                                   <img src="${
                                     post.image
                                   }" style="width: 70px; object-fit: cover;">
-                                <div style="margin-left: 0.8rem;">
-                                  <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
-                                   href="${
-                                     post.link
-                                   }" target="_blank" style="line-height: 1.5rem; font-size: 1.2rem; color: #ffffff; cursor: pointer;  ">${
+                                <div style="margin-left: 0.8rem;"> 
+                                  <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
+                                    href="${
+                                      post.link
+                                    }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1.4rem; color: #4D0097; cursor: pointer;">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-        }</a>
-                                  <p style="padding-bottom: 0.7rem; padding-top: 1rem; text-transform: capitalize;
-                                  ">${post.price} TK  &nbsp;&nbsp;${
-          post.shop
-        }</p>
+        }</a>                     <div style="display: flex; align-items: center;">
+                                    <p style="padding:0.6rem 0 0 0; font-size: 1.3rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
+                                    ">TK ${post.price}
+                                    </p>
+                                      <p style="padding:0.6rem 0 0 0; font-size: 1.3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
+                                        post.shop
+                                      }</p>
                                   </div>
-                                </div>
-                            </div>`;
+                              </div>
+                            </div>
+                          </div>`;
       });
-      console.log(similarProducts);
       darazInnerHTML = `<div>
-                          <h1 style="font-size: 2rem; margin: 0; padding: 10px 0;">
-                            Similar Products
-                          </h1>
-                          <p style="font-size: 1.2rem; padding-bottom: 0.8rem">Showing ${
-                            limit * (pagination - 1) + 1
-                          } - ${limit * pagination} of total
-                          ${total} Products</p>
-                          <div style="height: 48.5vh; overflow: auto;" >
-                            ${similarProducts}
-                          </div>
-                          <div style="display: flex; justify-content: center; margin-bottom: 0.7rem; padding-top: 0.5rem">
-                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem; font-size: 1.2rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
-                                cursor: pointer;">
-                                Previous
-                              </button>
-                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; font-size: 1.2rem; border-radius: 0.3rem; border: 1px solid transparent;
-                                  background-color: #ffffff; color: #000000; cursor: pointer;">
-                                  Next
-                              </button>
-                          </div>
-                        </div>`;
+                            <h1 style="font-size: 2.2rem; margin: 0; font-weight: 700;
+                            padding: 10px 0 6px 0;">
+                              Similar Products
+                            </h1>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
+                              <p style="font-size: 1.4rem; margin-bottom: 0; color: #ffffff;">Total Result:
+                              ${total}</p>
+                              <select id="cars" style="font-size: 1.4rem; background: none; border: none; outline: none; color: #ffffff;">
+                                <option style="color: #000; value="opel">Default</option>
+                                <option style="color: #000; value="volvo">Low to High</option>
+                                <option style="color: #000; value="saab">High to Low</option>
+                              </select>
+                            </div>
+                            <div style="height: 51vh; overflow: auto;" >
+                              ${similarProducts}
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0">
+                                <button style="font-size: 1.4rem; background: none; padding: 0; border: none; color: #ffffff;
+                                  cursor: pointer;">
+                                  Previous
+                                </button>
+                                <p style="margin: 0; font-size: 1.4rem;">Result: ${
+                                  limit * (pagination - 1) + 1
+                                } - ${limit * pagination}</p>
+                                <button onclick="this.innerText = 'Hello world'" style="font-size: 1.4rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
+                                    Next
+                                </button>
+                            </div>
+                          </div>`;
     }
     createDev.innerHTML = darazInnerHTML;
     async function fetchNextProducts() {
@@ -161,7 +172,7 @@ const newPageLoad = async () => {
                                     <img src="${
                                       post.image
                                     }" style="width: 70px; object-fit: cover;">
-                                  <div style="margin-left: 0.8rem;"> 
+                                  <div style="margin-left: 0.8rem;">
                                     <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
                                      href="${
                                        post.link
@@ -300,7 +311,7 @@ const newPageLoad = async () => {
       .setAttribute("style", "width: 27%; flex: unset;");
     document
       .querySelector(".product-details-summary .col-md-7")
-      .setAttribute("style", "width: 47%; flex: unset;");
+      .setAttribute("style", "width: 46%; flex: unset;");
 
     document.querySelector(
       ".product-details .product-images .thumbnail .main-img"
@@ -310,7 +321,7 @@ const newPageLoad = async () => {
     createDevStartech.innerHTML = startechInnerHTML;
     createDevStartech.setAttribute(
       "style",
-      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 100%;"
+      "display: inline-block; width: 30%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
     );
     document
       .querySelector(".product-details-summary > .container")
@@ -327,49 +338,59 @@ const newPageLoad = async () => {
     if (success) {
       let similarProducts = "";
       posts.forEach((post) => {
-        similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
-                               <div style="display: flex; padding: 5px; ">
+        similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
+                              <div style="display: flex; padding: 5px;">
                                   <img src="${
                                     post.image
                                   }" style="width: 70px; object-fit: cover;">
                                 <div style="margin-left: 0.8rem;"> 
-                                  <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
-                                   href="${
-                                     post.link
-                                   }" target="_blank" style="line-height: 1.3rem; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
+                                  <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
+                                    href="${
+                                      post.link
+                                    }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1rem; color: #4D0097; cursor: pointer;">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-        }</a>
-                                  <p style="padding-top: 0.5rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
-                                  ">${post.price} TK  &nbsp;&nbsp;${
-          post.shop
-        }</p>
+        }</a>                     <div style="display: flex; align-items: center;">
+                                    <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
+                                    ">TK ${post.price}
+                                    </p>
+                                      <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
+                                        post.shop
+                                      }</p>
                                   </div>
-                                </div>
-                            </div>`;
+                              </div>
+                            </div>
+                          </div>`;
       });
-      console.log(similarProducts);
       startechInnerHTML = `<div>
-                          <h1 style="font-size: 1.5rem; margin: 0; padding: 6px 0;">
-                            Similar Products
-                          </h1>
-                          <p style="font-size: 1rem; padding-bottom: 0; color: #ffffff;">Showing ${
-                            limit * (pagination - 1) + 1
-                          } - ${limit * pagination} of total
-                          ${total} Products</p>
-                          <div style="height: 48.5vh; overflow: auto;" >
-                            ${similarProducts}
-                          </div>
-                          <div style="display: flex; justify-content: center; padding: 0.6rem 0">
-                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem; background-color:  #ffffff; color: #000000; border: 1px solid transparent;
-                                cursor: pointer;">
-                                Previous
-                              </button>
-                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;  
-                                  background-color: #ffffff; color: #000000; cursor: pointer;">
-                                  Next
-                              </button>
-                          </div>
-                        </div>`;
+                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                            padding: 10px 0 6px 0;">
+                              Similar Products
+                            </h1>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
+                              <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
+                              ${total}</p>
+                              <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
+                                <option style="color: #000; value="opel">Default</option>
+                                <option style="color: #000; value="volvo">Low to High</option>
+                                <option style="color: #000; value="saab">High to Low</option>
+                              </select>
+                            </div>
+                            <div style="height: 51vh; overflow: auto;" >
+                              ${similarProducts}
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0">
+                                <button style="font-size: 1.1rem; background: none; padding: 0; border: none; color: #ffffff;
+                                  cursor: pointer;">
+                                  Previous
+                                </button>
+                                <p style="margin: 0; font-size: 1.1rem;">Result: ${
+                                  limit * (pagination - 1) + 1
+                                } - ${limit * pagination}</p>
+                                <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
+                                    Next
+                                </button>
+                            </div>
+                          </div>`;
     }
     createDevStartech.innerHTML = startechInnerHTML;
   } else if (location.href.includes("pickaboo.com/")) {
@@ -380,7 +401,7 @@ const newPageLoad = async () => {
     createDevPickaboo.className = "compare-product-info";
     createDevPickaboo.setAttribute(
       "style",
-      "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; color: white; height: 100%;"
+      "display: inline-block; width: 24%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
     );
     createDevPickaboo.innerHTML = pickabooInnerHTML;
     document.querySelector(".columns ").appendChild(createDevPickaboo);
@@ -397,49 +418,59 @@ const newPageLoad = async () => {
     if (success) {
       let similarProducts = "";
       posts.forEach((post) => {
-        similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
-                               <div style="display: flex; padding: 5px; ">
+        similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
+                              <div style="display: flex; padding: 5px;">
                                   <img src="${
                                     post.image
                                   }" style="width: 70px; object-fit: cover;">
-                                <div style="margin-left: 0.8rem;">
-                                  <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
-                                   href="${
-                                     post.link
-                                   }" target="_blank" style="line-height: 1.5rem; font-size: 1.5rem; color: #ffffff; cursor: pointer;  ">${
+                                <div style="margin-left: 0.8rem;"> 
+                                  <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
+                                    href="${
+                                      post.link
+                                    }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1rem; color: #4D0097; cursor: pointer;">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-        }</a>
-                                  <p style="padding-bottom: 0.7rem; padding-top: 1rem; text-transform: capitalize;
-                                  ">${post.price} TK  &nbsp;&nbsp;${
-          post.shop
-        }</p>
+        }</a>                     <div style="display: flex; align-items: center;">
+                                    <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
+                                    ">TK ${post.price}
+                                    </p>
+                                      <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
+                                        post.shop
+                                      }</p>
                                   </div>
-                                </div>
-                            </div>`;
+                              </div>
+                            </div>
+                          </div>`;
       });
-      console.log(similarProducts);
       pickabooInnerHTML = `<div>
-                          <h1 style="font-size: 2.5rem; color: #ffffff; margin: 0; padding: 10px 0;">
-                            Similar Products
-                          </h1>
-                          <p style="font-size: 1.5rem; padding-bottom: 0">Showing ${
-                            limit * (pagination - 1) + 1
-                          } - ${limit * pagination} of total
-                          ${total} Products</p>
-                          <div style="height: 48.5vh; overflow: auto;" >
-                            ${similarProducts}
-                          </div>
-                          <div style="display: flex; justify-content: center; padding: 0.5rem 0;">
-                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; font-size: 1.2rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
-                                cursor: pointer;">
-                                Previous
-                              </button>
-                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; font-size: 1.2rem; border-radius: 0.3rem; border: 1px solid transparent;
-                                  background-color: #ffffff; color: #000000; cursor: pointer;">
-                                  Next
-                              </button>
-                          </div>
-                        </div>`;
+                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                            padding: 10px 0 6px 0;">
+                              Similar Products
+                            </h1>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
+                              <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
+                              ${total}</p>
+                              <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
+                                <option style="color: #000; value="opel">Default</option>
+                                <option style="color: #000; value="volvo">Low to High</option>
+                                <option style="color: #000; value="saab">High to Low</option>
+                              </select>
+                            </div>
+                            <div style="height: 51vh; overflow: auto;" >
+                              ${similarProducts}
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0">
+                                <button style="font-size: 1.1rem; background: none; padding: 0; border: none; color: #ffffff;
+                                  cursor: pointer;">
+                                  Previous
+                                </button>
+                                <p style="margin: 0; font-size: 1.1rem;">Result: ${
+                                  limit * (pagination - 1) + 1
+                                } - ${limit * pagination}</p>
+                                <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
+                                    Next
+                                </button>
+                            </div>
+                          </div>`;
     }
     createDevPickaboo.innerHTML = pickabooInnerHTML;
   } else if (location.href.includes("othoba.com/")) {
@@ -457,7 +488,7 @@ const newPageLoad = async () => {
     createDevOthoba.className = "compare-product-info";
     createDevOthoba.setAttribute(
       "style",
-      "display: inline-block; width: 335px; background-color: #26ACD5; padding: 0 10px; color: white; height: 100%;"
+      "display: inline-block; width: 30%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
     );
     createDevOthoba.innerHTML = othobaInnerHTML;
 
@@ -476,49 +507,59 @@ const newPageLoad = async () => {
     if (success) {
       let similarProducts = "";
       posts.forEach((post) => {
-        similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
-                               <div style="display: flex; padding: 5px; ">
+        similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
+                              <div style="display: flex; padding: 5px;">
                                   <img src="${
                                     post.image
                                   }" style="width: 70px; object-fit: cover;">
                                 <div style="margin-left: 0.8rem;"> 
-                                  <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
-                                   href="${
-                                     post.link
-                                   }" target="_blank" style="line-height: 1.3rem; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
+                                  <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
+                                    href="${
+                                      post.link
+                                    }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1rem; color: #4D0097; cursor: pointer;">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-        }</a>
-                                  <p style="padding-bottom: 0.6rem; padding-top: 0.7rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
-                                  ">${post.price} TK  &nbsp;&nbsp;${
-          post.shop
-        }</p>
+        }</a>                     <div style="display: flex; align-items: center;">
+                                    <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
+                                    ">TK ${post.price}
+                                    </p>
+                                      <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
+                                        post.shop
+                                      }</p>
                                   </div>
-                                </div>
-                            </div>`;
+                              </div>
+                            </div>
+                          </div>`;
       });
-      console.log(similarProducts);
       othobaInnerHTML = `<div>
-                          <h1 style="font-size: 1.4rem; margin: 0; color: #ffffff; padding: 9px 0;">
-                            Similar Products
-                          </h1>
-                          <p style="font-size: 0.9rem; padding-bottom: 0.5rem; color: #ffffff;">Showing ${
-                            limit * (pagination - 1) + 1
-                          } - ${limit * pagination} of total
-                          ${total} Products</p>
-                          <div style="height: 48.5vh; overflow: auto;" >
-                            ${similarProducts}
-                          </div>
-                          <div style="display: flex; justify-content: center; padding: 0.5rem;">
-                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background:  #ffffff; font-size: 0.9rem; color: #000000; border: 1px solid transparent;
-                                cursor: pointer;">
-                                Previous
-                              </button>
-                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;  
-                                  background: #ffffff; font-size: 0.9rem; color: #000000; cursor: pointer;">
-                                  Next
-                              </button>
-                          </div>
-                        </div>`;
+                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                            padding: 10px 0 6px 0;">
+                              Similar Products
+                            </h1>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
+                              <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
+                              ${total}</p>
+                              <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
+                                <option style="color: #000; value="opel">Default</option>
+                                <option style="color: #000; value="volvo">Low to High</option>
+                                <option style="color: #000; value="saab">High to Low</option>
+                              </select>
+                            </div>
+                            <div style="height: 51vh; overflow: auto;" >
+                              ${similarProducts}
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0">
+                                <button style="font-size: 1.1rem; background: none; padding: 0; border: none; color: #ffffff;
+                                  cursor: pointer;">
+                                  Previous
+                                </button>
+                                <p style="margin: 0; font-size: 1.1rem;">Result: ${
+                                  limit * (pagination - 1) + 1
+                                } - ${limit * pagination}</p>
+                                <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
+                                    Next
+                                </button>
+                            </div>
+                          </div>`;
     }
     createDevOthoba.innerHTML = othobaInnerHTML;
   } else if (location.href.includes("priyoshop.com/")) {
@@ -675,7 +716,7 @@ const newPageLoad = async () => {
       .querySelector(".compare-product-info")
       .setAttribute(
         "style",
-        "display: inline-block; width: 340px; background-color: #26ACD5; padding: 0 10px; margin-left: 1rem; color: white; height: 62vh;"
+        "display: inline-block; width: 27%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; margin-left: 0.5rem;"
       );
     const productName = document.querySelector(".nameAndSubtext h1").innerText;
     let pagination = 1;
@@ -689,48 +730,59 @@ const newPageLoad = async () => {
     if (success) {
       let similarProducts = "";
       posts.forEach((post) => {
-        similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
-                               <div style="display: flex; padding: 5px; ">
+        similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
+                              <div style="display: flex; padding: 5px;">
                                   <img src="${
                                     post.image
                                   }" style="width: 70px; object-fit: cover;">
                                 <div style="margin-left: 0.8rem;"> 
-                                  <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
-                                   href="${
-                                     post.link
-                                   }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
+                                  <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
+                                    href="${
+                                      post.link
+                                    }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1rem; color: #4D0097; cursor: pointer;">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-        }</a>
-                                  <p style="padding-bottom: 0.6rem; padding-top: 0.7rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
-                                  ">${post.price} TK  &nbsp;&nbsp;${
-          post.shop
-        }</p>
+        }</a>                     <div style="display: flex; align-items: center;">
+                                    <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
+                                    ">TK ${post.price}
+                                    </p>
+                                      <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
+                                        post.shop
+                                      }</p>
                                   </div>
-                                </div>
-                            </div>`;
+                              </div>
+                            </div>
+                          </div>`;
       });
       chaldalInnerHTML = `<div>
-                          <h1 style="font-size: 1.5rem; margin: 0; padding: 10px 0;">
-                            Similar Products
-                          </h1>
-                          <p style="font-size: 1rem; padding-bottom: 0.6rem; color: #ffffff;">Showing ${
-                            limit * (pagination - 1) + 1
-                          } - ${limit * pagination} of total
-                          ${total} Products</p>
-                          <div style="height: 48.5vh; overflow: auto;" >
-                            ${similarProducts}
-                          </div>
-                          <div style="display: flex; justify-content: center; padding: 0.5rem 0;">
-                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
-                                cursor: pointer;">
-                                Previous
-                              </button>
-                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;  
-                                  background-color: #ffffff; color: #000000; cursor: pointer;">
-                                  Next
-                              </button>
-                          </div>
-                        </div>`;
+                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                            padding: 10px 0 6px 0;">
+                              Similar Products
+                            </h1>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
+                              <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
+                              ${total}</p>
+                              <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
+                                <option style="color: #000; value="opel">Default</option>
+                                <option style="color: #000; value="volvo">Low to High</option>
+                                <option style="color: #000; value="saab">High to Low</option>
+                              </select>
+                            </div>
+                            <div style="height: 51vh; overflow: auto;" >
+                              ${similarProducts}
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0">
+                                <button style="font-size: 1.1rem; background: none; padding: 0; border: none; color: #ffffff;
+                                  cursor: pointer;">
+                                  Previous
+                                </button>
+                                <p style="margin: 0; font-size: 1.1rem;">Result: ${
+                                  limit * (pagination - 1) + 1
+                                } - ${limit * pagination}</p>
+                                <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
+                                    Next
+                                </button>
+                            </div>
+                          </div>`;
     }
     createChaldal.innerHTML = chaldalInnerHTML;
     let loopCounter = 0;
