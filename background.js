@@ -89,40 +89,48 @@ const newPageLoad = async () => {
     const productName = document.querySelector(
       ".pdp-mod-product-badge-title"
     ).innerText;
-    let pagination = 1;
-    let limit = 10;
+    const myHeaders = new Headers();
+    myHeaders.append("X-TYPESENSE-API-KEY", "PWycI0o5aA9sthIiSFYm3rhpjEV13JmQ");
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
     const response = await fetch(
-      encodeURI(
-        `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
-      )
+      `https://jo8fa67x1dqtrhm9p-1.a1.typesense.net/collections/products/documents/search?query_by=title&pre_segmented_query=true&exhaustive_search=true&q=${productName}`,
+      requestOptions
     );
-    const { success, posts, total } = await response.json();
-    if (success) {
-      let similarProducts = "";
-      posts.forEach((post) => {
-        similarProducts += `<div style="margin-bottom: 0.8rem; margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
-                              <div style="display: flex; padding: 5px;">
-                                  <img src="${
-                                    post.image
-                                  }" style="width: 70px; object-fit: cover;">
-                                <div style="margin-left: 0.8rem;"> 
-                                  <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
-                                    href="${
-                                      post.link
-                                    }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1.4rem; color: #4D0097; cursor: pointer;">${
-          post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-        }</a>                     <div style="display: flex; align-items: center;">
-                                    <p style="padding:0.6rem 0 0 0; font-size: 1.3rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
-                                    ">TK ${post.price}
-                                    </p>
-                                      <p style="padding:0.6rem 0 0 0; font-size: 1.3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
-                                        post.shop
-                                      }</p>
-                                  </div>
-                              </div>
+    const result = await response.json();
+    const posts = result.hits.map((hit) => hit.document);
+    const totalProductCount = result.found;
+    let pagination = result.page;
+    let similarProducts = "";
+    posts.forEach((post) => {
+      similarProducts += `<div style="margin-bottom: 0.8rem; margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
+                            <div style="display: flex; padding: 5px;">
+                                <img src="${
+                                  post.image
+                                }" style="width: 70px; object-fit: cover;">
+                              <div style="margin-left: 0.8rem;"> 
+                                <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
+                                  href="${
+                                    post.link
+                                  }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1.4rem; color: #4D0097; cursor: pointer;">${
+        post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
+      }</a>                     <div style="display: flex; align-items: center;">
+                                  <p style="padding:0.6rem 0 0 0; font-size: 1.3rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
+                                  ">TK ${post.price}
+                                  </p>
+                                    <p style="padding:0.6rem 0 0 0; font-size: 1.3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
+                                      post.shop
+                                    }</p>
+                                </div>
                             </div>
-                          </div>`;
-      });
+                          </div>
+                        </div>`;
+    });
       darazInnerHTML = `<div>
                             <h1 style="font-size: 2.2rem; margin: 0; font-weight: 700;
                             padding: 10px 0 6px 0;">
@@ -130,7 +138,7 @@ const newPageLoad = async () => {
                             </h1>
                             <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
                               <p style="font-size: 1.4rem; margin-bottom: 0; color: #ffffff;">Total Result:
-                              ${total}</p>
+                              ${totalProductCount}</p>
                               <select id="cars" style="font-size: 1.4rem; background: none; border: none; outline: none; color: #ffffff;">
                                 <option style="color: #000; value="opel">Default</option>
                                 <option style="color: #000; value="volvo">Low to High</option>
@@ -146,75 +154,74 @@ const newPageLoad = async () => {
                                   Previous
                                 </button>
                                 <p style="margin: 0; font-size: 1.4rem;">Result: ${
-                                  limit * (pagination - 1) + 1
-                                } - ${limit * pagination}</p>
+                                  totalProductCount * (pagination - 1) + 1
+                                } - ${totalProductCount * pagination}</p>
                                 <button onclick="this.innerText = 'Hello world'" style="font-size: 1.4rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
                                     Next
                                 </button>
                             </div>
                           </div>`;
-    }
     createDev.innerHTML = darazInnerHTML;
-    async function fetchNextProducts() {
-      pagination++;
-      const response = await fetch(
-        encodeURI(
-          `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
-        )
-      );
-      const { success, posts, total } = await response.json();
-      if (success) {
-        let totalProductCount = 0;
-        let similarProducts = "";
-        posts.forEach((post) => {
-          similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
-                                 <div style="display: flex; padding: 5px; ">
-                                    <img src="${
-                                      post.image
-                                    }" style="width: 70px; object-fit: cover;">
-                                  <div style="margin-left: 0.8rem;">
-                                    <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
-                                     href="${
-                                       post.link
-                                     }" target="_blank" style="line-height: 1.5rem; font-size: 1.2rem; color: #ffffff; cursor: pointer;  ">${
-            post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-          }</a>
-                                    <p style="padding-bottom: 0.7rem; padding-top: 1rem; text-transform: capitalize;
-                                    ">${post.price} TK  &nbsp;&nbsp;${
-            post.shop
-          }</p>
-                                    </div>
-                                  </div>
-                              </div>`;
-        });
-        console.log(similarProducts);
-        darazInnerHTML = `<div>
-                            <h1 style="font-size: 2rem; margin: 0; padding: 10px 0;">
-                              Similar Products
-                            </h1>
-                            <p style="font-size: 1.2rem; padding-bottom: 0.8rem">Showing ${
-                              limit * (pagination - 1) + 1
-                            } - ${
-          limit * pagination > totalProductCount
-            ? totalProductCount
-            : limit * pagination
-        } of total
-                            ${total} Products</p>
-                            <div style="height: 48.5vh; overflow: auto;" >
-                              ${similarProducts}
-                            </div>
-                          </div>`;
-      }
-    }
-    async function fetchPreviousProducts() {
-      pagination--;
-      const response = await fetch(
-        encodeURI(
-          `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
-        )
-      );
-      const { success, posts, total } = await response.json();
-    }
+    // async function fetchNextProducts() {
+    //   pagination++;
+    //   const response = await fetch(
+    //     encodeURI(
+    //       `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
+    //     )
+    //   );
+    //   const { success, posts, total } = await response.json();
+    //   if (success) {
+    //     let totalProductCount = 0;
+    //     let similarProducts = "";
+    //     posts.forEach((post) => {
+    //       similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
+    //                              <div style="display: flex; padding: 5px; ">
+    //                                 <img src="${
+    //                                   post.image
+    //                                 }" style="width: 70px; object-fit: cover;">
+    //                               <div style="margin-left: 0.8rem;">
+    //                                 <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
+    //                                  href="${
+    //                                    post.link
+    //                                  }" target="_blank" style="line-height: 1.5rem; font-size: 1.2rem; color: #ffffff; cursor: pointer;  ">${
+    //         post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
+    //       }</a>
+    //                                 <p style="padding-bottom: 0.7rem; padding-top: 1rem; text-transform: capitalize;
+    //                                 ">${post.price} TK  &nbsp;&nbsp;${
+    //         post.shop
+    //       }</p>
+    //                                 </div>
+    //                               </div>
+    //                           </div>`;
+    //     });
+    //     console.log(similarProducts);
+    //     darazInnerHTML = `<div>
+    //                         <h1 style="font-size: 2rem; margin: 0; padding: 10px 0;">
+    //                           Similar Products
+    //                         </h1>
+    //                         <p style="font-size: 1.2rem; padding-bottom: 0.8rem">Showing ${
+    //                           limit * (pagination - 1) + 1
+    //                         } - ${
+    //       limit * pagination > totalProductCount
+    //         ? totalProductCount
+    //         : limit * pagination
+    //     } of total
+    //                         ${total} Products</p>
+    //                         <div style="height: 48.5vh; overflow: auto;" >
+    //                           ${similarProducts}
+    //                         </div>
+    //                       </div>`;
+    //   }
+    // }
+    // async function fetchPreviousProducts() {
+    //   pagination--;
+    //   const response = await fetch(
+    //     encodeURI(
+    //       `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
+    //     )
+    //   );
+    //   const { success, posts, total } = await response.json();
+    // }
   } else if (location.href.includes("ryanscomputers.com/")) {
     document.querySelector(
       ".product-info-section .image-detail-column"
@@ -235,18 +242,26 @@ const newPageLoad = async () => {
       .querySelector(".product-info-section .container .g-2")
       .appendChild(createDevRyans);
     const productName = document.querySelector(".product_content h2").innerText;
-    let pagination = 1;
-    let limit = 10;
+    const myHeaders = new Headers();
+    myHeaders.append("X-TYPESENSE-API-KEY", "PWycI0o5aA9sthIiSFYm3rhpjEV13JmQ");
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
     const response = await fetch(
-      encodeURI(
-        `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
-      )
+      `https://jo8fa67x1dqtrhm9p-1.a1.typesense.net/collections/products/documents/search?query_by=title&pre_segmented_query=true&exhaustive_search=true&q=${productName}`,
+      requestOptions
     );
-    const { success, posts, total } = await response.json();
-    if (success) {
-      let similarProducts = "";
-      posts.forEach((post) => {
-        similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
+    const result = await response.json();
+    const posts = result.hits.map((hit) => hit.document);
+    const totalProductCount = result.found;
+    let pagination = result.page;
+    let similarProducts = "";
+    posts.forEach((post) => {
+      similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
                               <div style="display: flex; padding: 5px;">
                                   <img src="${
                                     post.image
@@ -256,8 +271,8 @@ const newPageLoad = async () => {
                                     href="${
                                       post.link
                                     }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1rem; color: #4D0097; cursor: pointer;">${
-          post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-        }</a>                     <div style="display: flex; align-items: center;">
+        post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
+      }</a>                     <div style="display: flex; align-items: center;">
                                     <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
                                     ">TK ${post.price}
                                     </p>
@@ -268,15 +283,15 @@ const newPageLoad = async () => {
                               </div>
                             </div>
                           </div>`;
-      });
-      ryansInnerHTML = `<div>
+    });
+    ryansInnerHTML = `<div>
                             <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
                             padding: 10px 0 6px 0;">
                               Similar Products
                             </h1>
                             <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
                               <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
-                              ${total}</p>
+                              ${totalProductCount}</p>
                               <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
                                 <option style="color: #000; value="opel">Default</option>
                                 <option style="color: #000; value="volvo">Low to High</option>
@@ -292,14 +307,13 @@ const newPageLoad = async () => {
                                   Previous
                                 </button>
                                 <p style="margin: 0; font-size: 1.1rem;">Result: ${
-                                  limit * (pagination - 1) + 1
-                                } - ${limit * pagination}</p>
+                                  totalProductCount * (pagination - 1) + 1
+                                } - ${totalProductCount * pagination}</p>
                                 <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
                                     Next
                                 </button>
                             </div>
                           </div>`;
-    }
     createDevRyans.innerHTML = ryansInnerHTML;
   } else if (location.href.includes("startech.com.bd/")) {
     document.querySelector(
@@ -580,72 +594,79 @@ const newPageLoad = async () => {
       .querySelector(".product-essential > :nth-child(2)")
       .after(createPriyoshop);
     const productName = document.querySelector(".product-name").innerText;
-    let pagination = 1;
-    let limit = 10;
+    const myHeaders = new Headers();
+    myHeaders.append("X-TYPESENSE-API-KEY", "PWycI0o5aA9sthIiSFYm3rhpjEV13JmQ");
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
     const response = await fetch(
-      encodeURI(
-        `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
-      )
+      `https://jo8fa67x1dqtrhm9p-1.a1.typesense.net/collections/products/documents/search?query_by=title&pre_segmented_query=true&exhaustive_search=true&q=${productName}`,
+      requestOptions
     );
-    const { success, posts, total } = await response.json();
-    if (success) {
-      let similarProducts = "";
-      posts.forEach((post) => {
-        similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
-                              <div style="display: flex; padding: 5px;">
-                                  <img src="${
-                                    post.image
-                                  }" style="width: 70px; object-fit: cover;">
-                                <div style="margin-left: 0.8rem;"> 
-                                  <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
-                                    href="${
-                                      post.link
-                                    }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1rem; color: #4D0097; cursor: pointer;">${
-          post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-        }</a>                     <div style="display: flex; align-items: center;">
-                                    <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
-                                    ">TK ${post.price}
-                                    </p>
-                                      <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
-                                        post.shop
-                                      }</p>
-                                  </div>
-                              </div>
+    const result = await response.json();
+    const posts = result.hits.map((hit) => hit.document);
+    const totalProductCount = result.found;
+    let pagination = result.page;
+    let similarProducts = "";
+    posts.forEach((post) => {
+      similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
+                            <div style="display: flex; padding: 5px;">
+                                <img src="${
+                                  post.image
+                                }" style="width: 70px; object-fit: cover;">
+                              <div style="margin-left: 0.8rem;"> 
+                                <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
+                                  href="${
+                                    post.link
+                                  }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1rem; color: #4D0097; cursor: pointer;">${
+        post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
+      }</a>                     <div style="display: flex; align-items: center;">
+                                  <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
+                                  ">TK ${post.price}
+                                  </p>
+                                    <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
+                                      post.shop
+                                    }</p>
+                                </div>
                             </div>
-                          </div>`;
-      });
-      priyoShopInnerHTML = `<div>
-                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
-                            padding: 10px 0 6px 0;">
-                              Similar Products
-                            </h1>
-                            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
-                              <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
-                              ${total}</p>
-                              <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
-                                <option style="color: #000; value="opel">Default</option>
-                                <option style="color: #000; value="volvo">Low to High</option>
-                                <option style="color: #000; value="saab">High to Low</option>
-                              </select>
-                            </div>
-                            <div style="height: 51vh; overflow: auto;" >
-                              ${similarProducts}
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0">
-                                <button style="font-size: 1.1rem; background: none; padding: 0; border: none; color: #ffffff;
-                                  cursor: pointer;">
-                                  Previous
-                                </button>
-                                <p style="margin: 0; font-size: 1.1rem;">Result: ${
-                                  limit * (pagination - 1) + 1
-                                } - ${limit * pagination}</p>
-                                <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
-                                    Next
-                                </button>
-                            </div>
-                          </div>`;
-    }
-    createPriyoshop.innerHTML = priyoShopInnerHTML;
+                          </div>
+                        </div>`;
+    });
+    priyoShopInnerHTML = `<div>
+                          <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                          padding: 10px 0 6px 0;">
+                            Similar Products
+                          </h1>
+                          <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
+                            <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
+                            ${totalProductCount}</p>
+                            <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
+                              <option style="color: #000; value="opel">Default</option>
+                              <option style="color: #000; value="volvo">Low to High</option>
+                              <option style="color: #000; value="saab">High to Low</option>
+                            </select>
+                          </div>
+                          <div style="height: 51vh; overflow: auto;" >
+                            ${similarProducts}
+                          </div>
+                          <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0">
+                              <button style="font-size: 1.1rem; background: none; padding: 0; border: none; color: #ffffff;
+                                cursor: pointer;">
+                                Previous
+                              </button>
+                              <p style="margin: 0; font-size: 1.1rem;">Result: ${
+                                totalProductCount * (pagination - 1) + 1
+                              } - ${totalProductCount * pagination}</p>
+                              <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
+                                  Next
+                              </button>
+                          </div>
+                        </div>`;
+  createPriyoshop.innerHTML = priyoShopInnerHTML;
     async function fetchNextProducts() {
       pagination++;
       const response = await fetch(
