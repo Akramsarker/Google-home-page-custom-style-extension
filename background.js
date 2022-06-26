@@ -51,7 +51,7 @@ const newPageLoad = async () => {
                           </div>`;
 
   let pickabooInnerHTML = `<div style="height: 62vh">
-                          <h1 style="font-size: 2rem; color: #ffffff; margin: 0; padding: 10px 0;">
+                          <h1 style="font-size: 2.3rem; color: #ffffff; margin: 0; padding: 10px 0;">
                             Similar Products
                           </h1>
                             <p style="font-size: 1.5rem; color: #ffffff;">Loading... </p>
@@ -335,22 +335,30 @@ const newPageLoad = async () => {
     createDevStartech.innerHTML = startechInnerHTML;
     createDevStartech.setAttribute(
       "style",
-      "display: inline-block; width: 30%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
+      "display: inline-block; width: 30%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; height: 66vh;"
     );
     document
       .querySelector(".product-details-summary > .container")
       .lastElementChild.appendChild(createDevStartech);
     const productName = document.querySelector(".product-name").innerText;
-    let pagination = 1;
-    let limit = 10;
+    const myHeaders = new Headers();
+    myHeaders.append("X-TYPESENSE-API-KEY", "PWycI0o5aA9sthIiSFYm3rhpjEV13JmQ");
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
     const response = await fetch(
-      encodeURI(
-        `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
-      )
+      `https://jo8fa67x1dqtrhm9p-1.a1.typesense.net/collections/products/documents/search?query_by=title&pre_segmented_query=true&exhaustive_search=true&q=${productName}`,
+      requestOptions
     );
-    const { success, posts, total } = await response.json();
-    if (success) {
-      let similarProducts = "";
+    const result = await response.json();
+    const posts = result.hits.map((hit) => hit.document);
+    const totalProductCount = result.found;
+    let pagination = result.page;
+    let similarProducts = "";
       posts.forEach((post) => {
         similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
                               <div style="display: flex; padding: 5px;">
@@ -382,8 +390,8 @@ const newPageLoad = async () => {
                             </h1>
                             <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
                               <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
-                              ${total}</p>
-                              <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
+                              ${totalProductCount}</p>
+                              <select id="cars" style="background: none; width: auto; border: none; outline: none; color: #ffffff;">
                                 <option style="color: #000; value="opel">Default</option>
                                 <option style="color: #000; value="volvo">Low to High</option>
                                 <option style="color: #000; value="saab">High to Low</option>
@@ -397,15 +405,14 @@ const newPageLoad = async () => {
                                   cursor: pointer;">
                                   Previous
                                 </button>
-                                <p style="margin: 0; font-size: 1.1rem;">Result: ${
-                                  limit * (pagination - 1) + 1
-                                } - ${limit * pagination}</p>
+                                <p style="color: #ffffff; margin: 0; font-size: 1.1rem;">Result: ${
+                                  totalProductCount * (pagination - 1) + 1
+                                } - ${totalProductCount * pagination}</p>
                                 <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
                                     Next
                                 </button>
                             </div>
                           </div>`;
-    }
     createDevStartech.innerHTML = startechInnerHTML;
   } else if (location.href.includes("pickaboo.com/")) {
     document.querySelector(".main-wrapper").style.maxWidth = "1445px";
@@ -421,16 +428,24 @@ const newPageLoad = async () => {
     document.querySelector(".columns ").appendChild(createDevPickaboo);
 
     const productName = document.querySelector(".base").innerText;
-    let pagination = 1;
-    let limit = 10;
+    const myHeaders = new Headers();
+    myHeaders.append("X-TYPESENSE-API-KEY", "PWycI0o5aA9sthIiSFYm3rhpjEV13JmQ");
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
     const response = await fetch(
-      encodeURI(
-        `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
-      )
+      `https://jo8fa67x1dqtrhm9p-1.a1.typesense.net/collections/products/documents/search?query_by=title&pre_segmented_query=true&exhaustive_search=true&q=${productName}`,
+      requestOptions
     );
-    const { success, posts, total } = await response.json();
-    if (success) {
-      let similarProducts = "";
+    const result = await response.json();
+    const posts = result.hits.map((hit) => hit.document);
+    const totalProductCount = result.found;
+    let pagination = result.page;
+    let similarProducts = "";
       posts.forEach((post) => {
         similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
                               <div style="display: flex; padding: 5px;">
@@ -441,13 +456,13 @@ const newPageLoad = async () => {
                                   <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
                                     href="${
                                       post.link
-                                    }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1rem; color: #4D0097; cursor: pointer;">${
+                                    }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1.3rem; color: #4D0097; cursor: pointer;">${
           post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
         }</a>                     <div style="display: flex; align-items: center;">
-                                    <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
+                                    <p style="padding:0.6rem 0 0 0; font-size: 1.3rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
                                     ">TK ${post.price}
                                     </p>
-                                      <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
+                                      <p style="padding:0.6rem 0 0 0; font-size: 1.3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
                                         post.shop
                                       }</p>
                                   </div>
@@ -456,14 +471,14 @@ const newPageLoad = async () => {
                           </div>`;
       });
       pickabooInnerHTML = `<div>
-                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                            <h1 style="font-size: 2.3rem; margin: 0; color: #ffffff; font-weight: 700;
                             padding: 10px 0 6px 0;">
                               Similar Products
                             </h1>
                             <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
-                              <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
-                              ${total}</p>
-                              <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
+                              <p style="font-size: 1.5rem; margin-bottom: 0; color: #ffffff;">Total Result:
+                              ${totalProductCount}</p>
+                              <select id="cars" style="background: none; border: none; width: auto; font-size: 1.5rem; outline: none; color: #ffffff;">
                                 <option style="color: #000; value="opel">Default</option>
                                 <option style="color: #000; value="volvo">Low to High</option>
                                 <option style="color: #000; value="saab">High to Low</option>
@@ -478,14 +493,13 @@ const newPageLoad = async () => {
                                   Previous
                                 </button>
                                 <p style="margin: 0; font-size: 1.1rem;">Result: ${
-                                  limit * (pagination - 1) + 1
-                                } - ${limit * pagination}</p>
+                                  totalProductCount * (pagination - 1) + 1
+                                } - ${totalProductCount * pagination}</p>
                                 <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
                                     Next
                                 </button>
                             </div>
                           </div>`;
-    }
     createDevPickaboo.innerHTML = pickabooInnerHTML;
   } else if (location.href.includes("othoba.com/")) {
     document.querySelector(".product-essential  .row").style.display = "flex";
@@ -510,16 +524,24 @@ const newPageLoad = async () => {
       .querySelector(".product-essential  .col-md-eight > .row ")
       .appendChild(createDevOthoba);
     const productName = document.querySelector(".product-name  h1").innerText;
-    let pagination = 1;
-    let limit = 10;
+    const myHeaders = new Headers();
+    myHeaders.append("X-TYPESENSE-API-KEY", "PWycI0o5aA9sthIiSFYm3rhpjEV13JmQ");
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
     const response = await fetch(
-      encodeURI(
-        `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
-      )
+      `https://jo8fa67x1dqtrhm9p-1.a1.typesense.net/collections/products/documents/search?query_by=title&pre_segmented_query=true&exhaustive_search=true&q=${productName}`,
+      requestOptions
     );
-    const { success, posts, total } = await response.json();
-    if (success) {
-      let similarProducts = "";
+    const result = await response.json();
+    const posts = result.hits.map((hit) => hit.document);
+    const totalProductCount = result.found;
+    let pagination = result.page;
+    let similarProducts = "";
       posts.forEach((post) => {
         similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
                               <div style="display: flex; padding: 5px;">
@@ -545,14 +567,14 @@ const newPageLoad = async () => {
                           </div>`;
       });
       othobaInnerHTML = `<div>
-                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
+                            <h1 style="font-size: 1.5rem; margin: 0; color: #ffffff; font-weight: 700;
                             padding: 10px 0 6px 0;">
                               Similar Products
                             </h1>
                             <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
                               <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
-                              ${total}</p>
-                              <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
+                              ${totalProductCount}</p>
+                              <select id="cars" style="background: none; width: auto; font-size: 1rem; border: none; outline: none; color: #ffffff;">
                                 <option style="color: #000; value="opel">Default</option>
                                 <option style="color: #000; value="volvo">Low to High</option>
                                 <option style="color: #000; value="saab">High to Low</option>
@@ -567,14 +589,14 @@ const newPageLoad = async () => {
                                   Previous
                                 </button>
                                 <p style="margin: 0; font-size: 1.1rem;">Result: ${
-                                  limit * (pagination - 1) + 1
-                                } - ${limit * pagination}</p>
+                                  totalProductCount * (pagination - 1) + 1
+                                } - ${totalProductCount * pagination}</p>
                                 <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
                                     Next
                                 </button>
                             </div>
                           </div>`;
-    }
+
     createDevOthoba.innerHTML = othobaInnerHTML;
   } else if (location.href.includes("priyoshop.com/")) {
     document.querySelector(".product-essential");
@@ -739,16 +761,26 @@ const newPageLoad = async () => {
         "style",
         "display: inline-block; width: 27%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; margin-left: 0.5rem;"
       );
-    const productName = document.querySelector(".nameAndSubtext h1").innerText;
-    let pagination = 1;
-    let limit = 10;
-    const response = await fetch(
-      encodeURI(
-        `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
-      )
-    );
-    const { success, posts, total } = await response.json();
-    if (success) {
+
+      const productName =
+      document.querySelector(".nameAndSubtext h1").innerText;
+      const myHeaders = new Headers();
+      myHeaders.append("X-TYPESENSE-API-KEY", "PWycI0o5aA9sthIiSFYm3rhpjEV13JmQ");
+  
+      const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+  
+      const response = await fetch(
+        `https://jo8fa67x1dqtrhm9p-1.a1.typesense.net/collections/products/documents/search?query_by=title&pre_segmented_query=true&exhaustive_search=true&q=${productName}`,
+        requestOptions
+      );
+      const result = await response.json();
+      const posts = result.hits.map((hit) => hit.document);
+      const totalProductCount = result.found;
+      let pagination = result.page;
       let similarProducts = "";
       posts.forEach((post) => {
         similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
@@ -781,7 +813,7 @@ const newPageLoad = async () => {
                             </h1>
                             <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
                               <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
-                              ${total}</p>
+                              ${totalProductCount}</p>
                               <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
                                 <option style="color: #000; value="opel">Default</option>
                                 <option style="color: #000; value="volvo">Low to High</option>
@@ -797,14 +829,13 @@ const newPageLoad = async () => {
                                   Previous
                                 </button>
                                 <p style="margin: 0; font-size: 1.1rem;">Result: ${
-                                  limit * (pagination - 1) + 1
-                                } - ${limit * pagination}</p>
+                                  totalProductCount * (pagination - 1) + 1
+                                } - ${totalProductCount * pagination}</p>
                                 <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
                                     Next
                                 </button>
                             </div>
                           </div>`;
-    }
     createChaldal.innerHTML = chaldalInnerHTML;
     let loopCounter = 0;
     setInterval(myCallback, 5000);
@@ -829,15 +860,23 @@ const newPageLoad = async () => {
 
         const productName =
           document.querySelector(".nameAndSubtext h1").innerText;
-        let pagination = 1;
-        let limit = 10;
-        const response = await fetch(
-          encodeURI(
-            `https://mullojachai.herokuapp.com/api/v1/products?search=${productName}&limit=${limit}&pagination=${pagination}`
-          )
-        );
-        const { success, posts, total } = await response.json();
-        if (success) {
+          const myHeaders = new Headers();
+          myHeaders.append("X-TYPESENSE-API-KEY", "PWycI0o5aA9sthIiSFYm3rhpjEV13JmQ");
+      
+          const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow",
+          };
+      
+          const response = await fetch(
+            `https://jo8fa67x1dqtrhm9p-1.a1.typesense.net/collections/products/documents/search?query_by=title&pre_segmented_query=true&exhaustive_search=true&q=${productName}`,
+            requestOptions
+          );
+          const result = await response.json();
+          const posts = result.hits.map((hit) => hit.document);
+          const totalProductCount = result.found;
+          let pagination = result.page;
           let similarProducts = "";
           posts.forEach((post) => {
             similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
@@ -867,8 +906,8 @@ const newPageLoad = async () => {
                             Similar Products
                           </h1>
                           <p style="font-size: 1rem; padding-bottom: 0.6rem; color: #ffffff;">Showing ${
-                            limit * (pagination - 1) + 1
-                          } - ${limit * pagination} of total
+                            totalProductCount * (pagination - 1) + 1
+                          } - ${totalProductCount * pagination} of total
                           ${total} Products</p>
                           <div style="height: 48.5vh; overflow: auto;" >
                             ${similarProducts}
@@ -885,7 +924,6 @@ const newPageLoad = async () => {
                           </div>
                         </div>`;
           createChaldal.innerHTML = chaldalModalInnerHTML;
-        }
         loopCounter++;
       } else {
         loopCounter = 0;
