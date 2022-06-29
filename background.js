@@ -28,6 +28,10 @@ const newPageLoad = async () => {
       previousButton: "font-size: 1.3rem;",
       nextButton: "font-size: 1.3rem;",
       resultButtonTitle: "margin: 0; font-size: 1.3rem;",
+      loadingContainer: "height: 61vh",
+      loadingHeader:
+        "font-size: 2rem; margin: 0; font-weight: 700; padding: 10px 0 6px 0;",
+      loadingText: "font-size: 1.3rem;",
     },
     ryanscomputers: {
       mainDivStyle: "padding: 0.3rem 0",
@@ -45,6 +49,10 @@ const newPageLoad = async () => {
       previousButton: "font-size: 1rem;",
       nextButton: "font-size: 1rem;",
       resultButtonTitle: "margin: 0; font-size: 1rem;",
+      loadingContainer: "height: 62vh",
+      loadingHeader:
+        "font-size: 1.5rem; margin: 0; font-weight: 700; padding: 10px 0 6px 0;",
+      loadingText: "font-size: 1rem; color: #ffffff;",
     },
     startech: {
       mainDivStyle: "padding: 0.3rem 0",
@@ -62,6 +70,10 @@ const newPageLoad = async () => {
       previousButton: "font-size: 1rem;",
       nextButton: "font-size: 1rem;",
       resultButtonTitle: "margin: 0; font-size: 1rem;",
+      loadingContainer: "height: 62vh",
+      loadingHeader:
+        "font-size: 1.5rem; margin: 0; font-weight: 700; padding: 10px 0 6px 0;",
+      loadingText: "font-size: 1rem; color: #ffffff;",
     },
     pickaboo: {
       mainDivStyle: "padding: 0.3rem 0",
@@ -79,6 +91,10 @@ const newPageLoad = async () => {
       previousButton: "font-size: 1.3rem;",
       nextButton: "font-size: 1.3rem;",
       resultButtonTitle: "margin: 0; font-size: 1.5rem;",
+      loadingContainer: "height: 62vh",
+      loadingHeader:
+        "font-size: 2.3rem; color: #ffffff; margin: 0; padding: 10px 0;",
+      loadingText: "font-size: 1.5rem; color: #ffffff;",
     },
     othoba: {
       mainDivStyle: "padding: 0.3rem 0",
@@ -96,6 +112,10 @@ const newPageLoad = async () => {
       previousButton: "font-size: 1rem;",
       nextButton: "font-size: 1rem;",
       resultButtonTitle: "margin: 0; font-size: 1rem;",
+      loadingContainer: "height: 61.5vh",
+      loadingHeader:
+        "font-size: 1.5rem; color: #ffffff; margin: 0; padding: 10px 0;",
+      loadingText: "font-size: 1rem; color: #ffffff;",
     },
     priyoshop: {
       mainDivStyle: "padding: 0.3rem 0",
@@ -113,6 +133,10 @@ const newPageLoad = async () => {
       previousButton: "font-size: 1rem;",
       nextButton: "font-size: 1rem; padding: 0;",
       resultButtonTitle: "margin: 0; font-size: 1rem;",
+      loadingContainer: "height: 62vh",
+      loadingHeader:
+        "font-size: 1.5rem; margin: 0; font-weight: 700; padding: 10px 0 6px 0;",
+      loadingText: "font-size: 0.9rem; color: #ffffff;",
     },
     chaldal: {
       mainDivStyle: "padding: 0.3rem 0",
@@ -132,67 +156,23 @@ const newPageLoad = async () => {
       resultButtonTitle: "margin: 0; font-size: 1.3rem;",
     },
   };
+  function loadingInnerHtml(loadingSiteName) {
+    return `<div style="${styles[loadingSiteName].loadingContainer}">
+            <h1 style="${styles[loadingSiteName].loadingHeader}">
+              Similar Products  
+            </h1>
+              <div style="">
+                <h3 style="${styles[loadingSiteName].loadingText}">Loading... </h3>
+              </div>
+        </div>`;
+  }
 
-  let darazInnerHTML = `<div style="height: 62vh">
-                            <h1 style="font-size: 2rem; margin: 0; font-weight: 700;
-                            padding: 10px 0 6px 0;">
-                              Similar Products  
-                            </h1>
-                          <div style="">
-                            <h3>Loading... </h3>
-                          </div>
-                        </div>`;
-  let ryansInnerHTML = `<div style="height: 62vh">
-                        <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
-                        padding: 10px 0 6px 0;">
-                          Similar Products  
-                        </h1>
-                            <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
-                        </div>`;
-
-  let startechInnerHTML = `<div style="height: 62vh">
-                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
-                            padding: 10px 0 6px 0;">
-                              Similar Products  
-                            </h1>
-                            <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
-                        </div>`;
-
-  let othobaInnerHTML = `<div style="height: 61.5vh">
-                        <h1 style="font-size: 1.5rem; color: #ffffff; margin: 0; padding: 10px 0;">
-                          Similar Products
-                        </h1>
-                          <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
-                      </div>`;
-
-  let priyoShopInnerHTML = `<div style="height: 62vh">
-                              <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
-                              padding: 10px 0 6px 0;">
-                                Similar Products  
-                              </h1>
-                              <p style="font-size: 0.9rem; color: #ffffff;">Loading... </p>
-                          </div>`;
-
-  let pickabooInnerHTML = `<div style="height: 62vh">
-                          <h1 style="font-size: 2.3rem; color: #ffffff; margin: 0; padding: 10px 0;">
-                            Similar Products
-                          </h1>
-                            <p style="font-size: 1.5rem; color: #ffffff;">Loading... </p>
-                        </div>`;
-
-  let chaldalInnerHTML = `<div style="height: 62vh">
-                              <h1 style="font-size: 1.5rem; color: #ffffff; margin: 0; padding: 10px 0;">
-                                Similar Products
-                              </h1>
-                                <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
-                          </div>`;
-
-  let chaldalModalInnerHTML = `<div style="height: 62vh">
-                            <h1 style="font-size: 1.5rem; color: #ffffff; margin: 0; padding: 10px 0;">
-                              Similar Products
-                            </h1>
-                              <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
-                          </div>`;
+  // let chaldalInnerHTML = `<div style="height: 62vh">
+  //                             <h1 style="font-size: 1.5rem; color: #ffffff; margin: 0; padding: 10px 0;">
+  //                               Similar Products
+  //                             </h1>
+  //                               <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
+  //                         </div>`;
 
   // Generate Similar Products
   let sortBy = "price:asc";
@@ -283,7 +263,7 @@ const newPageLoad = async () => {
                               }">
                                 Previous
                               </button>
-                              <p style="${
+                              <p style="color: #ffffff; ${
                                 styles[siteName].resultButtonTitle
                               }">Result: ${
       totalProductCount * (pagination - 1) + 1
@@ -386,7 +366,7 @@ const newPageLoad = async () => {
     // }
   }
 
-  if (location.href.includes("https://www.daraz.com.bd/products/")) {
+  if (location.href.includes("daraz.com.bd/products/")) {
     document.querySelector("#root").style.width = "1380px";
     document.querySelector(".pdp-block__product-detail").style.width =
       "calc(100% - 674px)";
@@ -398,7 +378,7 @@ const newPageLoad = async () => {
       "style",
       "display: inline-block; width: 320px; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
     );
-    createDevDaraz.innerHTML = darazInnerHTML;
+    createDevDaraz.innerHTML = loadingInnerHtml("daraz");
     document.querySelector("#block-7S7Xc8ZF40").appendChild(createDevDaraz);
     const productName = document.querySelector(
       ".pdp-mod-product-badge-title"
@@ -406,7 +386,7 @@ const newPageLoad = async () => {
     generateSimilarProducts(
       "daraz",
       productName,
-      darazInnerHTML,
+      loadingInnerHtml("daraz"),
       createDevDaraz
     );
   } else if (location.href.includes("ryanscomputers.com/")) {
@@ -425,12 +405,12 @@ const newPageLoad = async () => {
     document
       .querySelector(".product-info-section .container .g-2")
       .appendChild(createDevRyans);
-    createDevRyans.innerHTML = ryansInnerHTML;
+    createDevRyans.innerHTML = loadingInnerHtml("ryanscomputers");
     const productName = document.querySelector(".product_content h2").innerText;
     generateSimilarProducts(
       "ryanscomputers",
       productName,
-      ryansInnerHTML,
+      loadingInnerHtml("ryanscomputers"),
       createDevRyans
     );
   } else if (location.href.includes("startech.com.bd/")) {
@@ -450,7 +430,7 @@ const newPageLoad = async () => {
     ).style.maxWidth = "300px";
     const createDevStartech = document.createElement("div");
     createDevStartech.className = "compare-product-info";
-    createDevStartech.innerHTML = startechInnerHTML;
+    createDevStartech.innerHTML = loadingInnerHtml("startech");
     createDevStartech.setAttribute(
       "style",
       "display: inline-block; width: 30%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; height: 66vh;"
@@ -458,12 +438,11 @@ const newPageLoad = async () => {
     document
       .querySelector(".product-details-summary > .container")
       .lastElementChild.appendChild(createDevStartech);
-    createDevStartech.innerHTML = startechInnerHTML;
     const productName = document.querySelector(".product-name").innerText;
     generateSimilarProducts(
       "startech",
       productName,
-      startechInnerHTML,
+      loadingInnerHtml("startech"),
       createDevStartech
     );
   } else if (location.href.includes("pickaboo.com/")) {
@@ -476,13 +455,13 @@ const newPageLoad = async () => {
       "style",
       "display: inline-block; width: 24%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
     );
-    createDevPickaboo.innerHTML = pickabooInnerHTML;
+    createDevPickaboo.innerHTML = loadingInnerHtml("pickaboo");
     document.querySelector(".columns ").appendChild(createDevPickaboo);
     const productName = document.querySelector(".base").innerText;
     generateSimilarProducts(
       "pickaboo",
       productName,
-      pickabooInnerHTML,
+      loadingInnerHtml("pickaboo"),
       createDevPickaboo
     );
   } else if (location.href.includes("othoba.com/")) {
@@ -502,7 +481,7 @@ const newPageLoad = async () => {
       "style",
       "display: inline-block; width: 30%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
     );
-    createDevOthoba.innerHTML = othobaInnerHTML;
+    createDevOthoba.innerHTML = loadingInnerHtml("othoba");
     document
       .querySelector(".product-essential  .col-md-eight > .row ")
       .appendChild(createDevOthoba);
@@ -510,7 +489,7 @@ const newPageLoad = async () => {
     generateSimilarProducts(
       "othoba",
       productName,
-      othobaInnerHTML,
+      loadingInnerHtml("othoba"),
       createDevOthoba
     );
   } else if (location.href.includes("priyoshop.com/")) {
@@ -521,7 +500,7 @@ const newPageLoad = async () => {
       .setAttribute("style", "width: 43%; float: left; margin-left: 1rem;");
     const createPriyoshop = document.createElement("div");
     createPriyoshop.className = "compare-product-info";
-    createPriyoshop.innerHTML = priyoShopInnerHTML;
+    createPriyoshop.innerHTML = loadingInnerHtml("priyoshop");
     createPriyoshop.setAttribute(
       "style",
       "display: inline-block; width: 22%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
@@ -533,7 +512,7 @@ const newPageLoad = async () => {
     generateSimilarProducts(
       "priyoshop",
       productName,
-      priyoShopInnerHTML,
+      loadingInnerHtml("priyoshop"),
       createPriyoshop
     );
   } else if (location.href.includes("chaldal.com/")) {
