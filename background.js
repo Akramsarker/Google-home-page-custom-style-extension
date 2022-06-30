@@ -72,7 +72,7 @@ const newPageLoad = async () => {
       resultButtonTitle: "margin: 0; font-size: 1rem;",
       loadingContainer: "height: 62vh",
       loadingHeader:
-        "font-size: 1.5rem; margin: 0; font-weight: 700; padding: 10px 0 6px 0;",
+        "font-size: 1.6rem; margin: 0; font-weight: 700; padding: 10px 0 6px 0;",
       loadingText: "font-size: 1rem; color: #ffffff;",
     },
     pickaboo: {
@@ -86,14 +86,14 @@ const newPageLoad = async () => {
       similarProductDivStyle: "height: 51vh; overflow: auto;",
       resultTitle: "font-size: 1.5rem; margin-bottom: 0; color: #ffffff",
       selectContainerStyle: "padding-bottom: 0.7rem",
-      selectStyle: "font-size: 1.3rem; width:auto; color: #ffffff",
+      selectStyle: "font-size: 1.4rem; width: auto; color: #ffffff",
       buttonContainerStyle: "padding: 1rem 0",
       previousButton: "font-size: 1.3rem;",
       nextButton: "font-size: 1.3rem;",
       resultButtonTitle: "margin: 0; font-size: 1.5rem;",
       loadingContainer: "height: 62vh",
       loadingHeader:
-        "font-size: 2.3rem; color: #ffffff; margin: 0; padding: 10px 0;",
+        "font-size: 2.6rem; color: #ffffff; margin: 0; padding: 10px 0;",
       loadingText: "font-size: 1.5rem; color: #ffffff;",
     },
     othoba: {
@@ -141,38 +141,36 @@ const newPageLoad = async () => {
     chaldal: {
       mainDivStyle: "padding: 0.3rem 0",
       subContainerStyle: "display: flex; padding: 5px;",
-      linkStyle: "line-height: 1.6rem; font-size: 1.3rem;",
-      priceStyle: "padding:0.6rem 0 0 0; font-size: 1.3rem;",
-      shopName: "padding:0.6rem 0 0 0; font-size: 1.3rem;",
+      linkStyle: "line-height: 1.3rem; font-size: 1rem;",
+      priceStyle: "padding: 0.6rem 0 0 0; font-size: 1rem;",
+      shopName: "padding:0.6rem 0 0 0; font-size: 1rem;",
       headerTitle:
-        "font-size: 2rem; margin: 0; font-weight: 700; padding: 10px 0 9px 0",
-      similarProductDivStyle: "height: 51vh; overflow: auto;",
-      resultTitle: "font-size: 1.3rem; margin-bottom: 0; color: #ffffff",
+        "font-size: 1.5rem; font-weight: 700; padding:0.6rem 0 0.7rem 0; margin: 0;",
+      similarProductDivStyle: "height: 48.5vh; overflow: auto;",
+      resultTitle: "font-size: 1rem;",
       selectContainerStyle: "padding-bottom: 0.7rem",
-      selectStyle: "font-size: 1.3rem; color: #ffffff",
-      buttonContainerStyle: "padding: 1rem 0;",
-      previousButton: "font-size: 1.3rem;",
-      nextButton: "font-size: 1.3rem;",
-      resultButtonTitle: "margin: 0; font-size: 1.3rem;",
+      selectStyle: "font-size: 1rem; color: #ffffff",
+      buttonContainerStyle: "padding: 0.6rem 0",
+      previousButton: "font-size: 1.1rem;",
+      nextButton: "font-size: 1.1rem;",
+      resultButtonTitle: "font-size: 1.1rem;",
+      loadingContainer: "height: 62vh",
+      loadingHeader:
+        "font-size: 1.5rem; color: #ffffff; margin: 0; padding: 10px 0;",
+      loadingText: "font-size: 1rem; color: #ffffff;",
     },
   };
+
   function loadingInnerHtml(loadingSiteName) {
     return `<div style="${styles[loadingSiteName].loadingContainer}">
             <h1 style="${styles[loadingSiteName].loadingHeader}">
               Similar Products  
             </h1>
-              <div style="">
+              <div>
                 <h3 style="${styles[loadingSiteName].loadingText}">Loading... </h3>
               </div>
         </div>`;
   }
-
-  // let chaldalInnerHTML = `<div style="height: 62vh">
-  //                             <h1 style="font-size: 1.5rem; color: #ffffff; margin: 0; padding: 10px 0;">
-  //                               Similar Products
-  //                             </h1>
-  //                               <p style="font-size: 1rem; color: #ffffff;">Loading... </p>
-  //                         </div>`;
 
   // Generate Similar Products
   let sortBy = "price:asc";
@@ -268,7 +266,7 @@ const newPageLoad = async () => {
                               }">Result: ${
       totalProductCount * (pagination - 1) + 1
     } - ${totalProductCount * pagination}</p>
-                              <button onclick="this.innerText = 'Hello world'" style="border: none; color: #ffffff; padding: 0; background: none; cursor: pointer; ${
+                              <button onclick="nextProduct" style="border: none; color: #ffffff; padding: 0; background: none; cursor: pointer; ${
                                 styles[siteName].nextButton
                               }">
                                   Next
@@ -276,7 +274,7 @@ const newPageLoad = async () => {
                           </div>
                     </div>`;
     createDev.innerHTML = innerHtml;
-    async function onSortChange() {
+    async function nextProduct() {
       pagination++;
       const myHeaders = new Headers();
       myHeaders.append(
@@ -520,92 +518,23 @@ const newPageLoad = async () => {
     document.querySelector(".product-detail-block .right").style.width = "42%";
     const createChaldal = document.createElement("div");
     createChaldal.className = "compare-product-info";
-    createChaldal.innerHTML = chaldalInnerHTML;
+    createChaldal.innerHTML = loadingInnerHtml("chaldal");
     document
       .querySelector(".product-detail-block .productDetails")
       .appendChild(createChaldal);
-
     document
       .querySelector(".compare-product-info")
       .setAttribute(
         "style",
         "display: inline-block; width: 27%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; margin-left: 0.5rem;"
       );
-
     const productName = document.querySelector(".nameAndSubtext h1").innerText;
-    const myHeaders = new Headers();
-    myHeaders.append("X-TYPESENSE-API-KEY", "PWycI0o5aA9sthIiSFYm3rhpjEV13JmQ");
-
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    const response = await fetch(
-      `https://jo8fa67x1dqtrhm9p-1.a1.typesense.net/collections/products/documents/search?query_by=title&pre_segmented_query=true&exhaustive_search=true&q=${productName}`,
-      requestOptions
+    generateSimilarProducts(
+      "chaldal",
+      productName,
+      loadingInnerHtml("chaldal"),
+      createChaldal
     );
-    const result = await response.json();
-    const posts = result.hits.map((hit) => hit.document);
-    const totalProductCount = result.found;
-    let pagination = result.page;
-    let similarProducts = "";
-    posts.forEach((post) => {
-      similarProducts += `<div style="margin-bottom: 0.8rem;margin-right: 0.3rem; background: #ffffff; border-radius: 3px; padding: 0.3rem 0">
-                              <div style="display: flex; padding: 5px;">
-                                  <img src="${
-                                    post.image
-                                  }" style="width: 70px; object-fit: cover;">
-                                <div style="margin-left: 0.8rem;"> 
-                                  <a onMouseOver="this.style.color='#4D0097'"; onMouseOut="this.style.color='#4D0067'"
-                                    href="${
-                                      post.link
-                                    }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 1rem; color: #4D0097; cursor: pointer;">${
-        post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-      }</a>                     <div style="display: flex; align-items: center;">
-                                    <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-right: 3rem; margin-bottom: 0; text-transform: capitalize; color: rgba(50, 59, 255, 0.9); 
-                                    ">TK ${post.price}
-                                    </p>
-                                      <p style="padding:0.6rem 0 0 0; font-size: 1rem; margin-bottom: 0; text-transform: capitalize; color: rgba(255, 0, 0, 0.83);">${
-                                        post.shop
-                                      }</p>
-                                  </div>
-                              </div>
-                            </div>
-                          </div>`;
-    });
-    chaldalInnerHTML = `<div>
-                            <h1 style="font-size: 1.5rem; margin: 0; font-weight: 700;
-                            padding: 10px 0 6px 0;">
-                              Similar Products
-                            </h1>
-                            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem">
-                              <p style="font-size: 1rem; margin-bottom: 0; color: #ffffff;">Total Result:
-                              ${totalProductCount}</p>
-                              <select id="cars" style="background: none; border: none; outline: none; color: #ffffff;">
-                                <option style="color: #000; value="opel">Default</option>
-                                <option style="color: #000; value="volvo">Low to High</option>
-                                <option style="color: #000; value="saab">High to Low</option>
-                              </select>
-                            </div>
-                            <div style="height: 51vh; overflow: auto;" >
-                              ${similarProducts}
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0">
-                                <button style="font-size: 1.1rem; background: none; padding: 0; border: none; color: #ffffff;
-                                  cursor: pointer;">
-                                  Previous
-                                </button>
-                                <p style="margin: 0; font-size: 1.1rem;">Result: ${
-                                  totalProductCount * (pagination - 1) + 1
-                                } - ${totalProductCount * pagination}</p>
-                                <button onclick="this.innerText = 'Hello world'" style="font-size: 1.1rem; border: none; padding: 0; background: none; color: #ffffff; cursor: pointer;">
-                                    Next
-                                </button>
-                            </div>
-                          </div>`;
-    createChaldal.innerHTML = chaldalInnerHTML;
     let loopCounter = 0;
     setInterval(myCallback, 5000);
     async function myCallback() {
@@ -616,7 +545,7 @@ const newPageLoad = async () => {
         document.querySelector(".right").style.width = "39%";
         const createChaldal = document.createElement("div");
         createChaldal.className = "compare-product-info";
-        createChaldal.innerHTML = chaldalModalInnerHTML;
+        createChaldal.innerHTML = loadingInnerHtml("chaldal");
         document
           .querySelector(".lightbox .productDetails")
           .appendChild(createChaldal);
@@ -624,76 +553,16 @@ const newPageLoad = async () => {
           .querySelector(".compare-product-info")
           .setAttribute(
             "style",
-            "display: inline-block; width: 290px; background-color: #26ACD5; margin-top: 2rem; margin-left: 1rem; padding: 0 10px; color: white; height: 100%;"
+            "display: inline-block; width: 90%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; margin-left: 0.5rem;"
           );
-
         const productName =
           document.querySelector(".nameAndSubtext h1").innerText;
-        const myHeaders = new Headers();
-        myHeaders.append(
-          "X-TYPESENSE-API-KEY",
-          "PWycI0o5aA9sthIiSFYm3rhpjEV13JmQ"
+        generateSimilarProducts(
+          "chaldal",
+          productName,
+          loadingInnerHtml("chaldal"),
+          createChaldal
         );
-
-        const requestOptions = {
-          method: "GET",
-          headers: myHeaders,
-          redirect: "follow",
-        };
-
-        const response = await fetch(
-          `https://jo8fa67x1dqtrhm9p-1.a1.typesense.net/collections/products/documents/search?query_by=title&pre_segmented_query=true&exhaustive_search=true&q=${productName}`,
-          requestOptions
-        );
-        const result = await response.json();
-        const posts = result.hits.map((hit) => hit.document);
-        const totalProductCount = result.found;
-        let pagination = result.page;
-        let similarProducts = "";
-        posts.forEach((post) => {
-          similarProducts += `<div style="margin-bottom: 0.8rem; border: 1px solid #ffffff; margin-right: 0.5rem; borderRadius: 10px;">
-                               <div style="display: flex; padding: 5px; ">
-                                  <img src="${
-                                    post.image
-                                  }" style="width: 70px; object-fit: cover;">
-                                <div style="margin-left: 0.8rem;">
-                                  <a   onMouseOver="this.style.color='#F6F1F0'" onMouseOut="this.style.color='#ffffff'"
-                                   href="${
-                                     post.link
-                                   }" target="_blank" style="line-height: 1.3rem; text-decoration: none; font-size: 0.9rem; color: #ffffff; cursor: pointer;  ">${
-            post.title.length > 50 ? post.title.slice(0, 50) + "…" : post.title
-          }</a>
-                                  <p style="padding-bottom: 0.6rem; padding-top: 0.7rem; font-size: 0.8rem; color: #ffffff; text-transform: capitalize;
-                                  ">${post.price} TK  &nbsp;&nbsp;${
-            post.shop
-          }</p>
-                                  </div>
-                                </div>
-                            </div>`;
-        });
-        chaldalModalInnerHTML = `<div>
-                          <h1 style="font-size: 1.5rem; margin: 0; padding: 10px 0;">
-                            Similar Products
-                          </h1>
-                          <p style="font-size: 1rem; padding-bottom: 0.6rem; color: #ffffff;">Showing ${
-                            totalProductCount * (pagination - 1) + 1
-                          } - ${totalProductCount * pagination} of total
-                          ${total} Products</p>
-                          <div style="height: 48.5vh; overflow: auto;" >
-                            ${similarProducts}
-                          </div>
-                          <div style="display: flex; justify-content: center; padding: 0.5rem 0;">
-                              <button onclick="fetchPreviousProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; margin-right: 0.8rem;  background-color:  #ffffff; color: #000000; border: 1px solid transparent;
-                                cursor: pointer;">
-                                Previous
-                              </button>
-                              <button onclick="fetchNextProducts()" style="padding: 0.5rem 0.75rem; border-radius: 0.3rem; border: 1px solid transparent;
-                                  background-color: #ffffff; color: #000000; cursor: pointer;">
-                                  Next
-                              </button>
-                          </div>
-                        </div>`;
-        createChaldal.innerHTML = chaldalModalInnerHTML;
         loopCounter++;
       } else {
         loopCounter = 0;
