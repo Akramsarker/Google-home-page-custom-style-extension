@@ -8,7 +8,6 @@ chrome.webNavigation.onCompleted.addListener(({ tabId, frameId }) => {
     function: newPageLoad,
   });
 });
-
 const newPageLoad = async () => {
   // All Styles
   const styles = {
@@ -202,7 +201,7 @@ const newPageLoad = async () => {
     let pagination = result.page;
     let similarProducts = "";
     posts.forEach((post) => {
-      similarProducts += `<div style="margin-bottom: 0.8rem; font-family: sans-serif !important;
+      similarProducts += `<div style="margin-bottom: 0.8rem;
       margin-right: 0.3rem; background: #ffffff; border-radius: 3px; ${
         styles[siteName].mainDivStyle
       }">
@@ -265,7 +264,7 @@ const newPageLoad = async () => {
                           <div style="display: flex; justify-content: space-between; align-items: center; ${
                             styles[siteName].buttonContainerStyle
                           }">
-                                <button id="previous" style="background: none; color: #ffffff; padding: 0; border: none; cursor: pointer; ${
+                                <button id="previous" style="background: none; color: #ffffff; font-weight: 900; padding: 0; border: none; cursor: pointer; ${
                                   styles[siteName].previousButton
                                 }">
                                 Previous
@@ -275,7 +274,7 @@ const newPageLoad = async () => {
                               }">Result: ${perPage * (pagination - 1) + 1} - ${
       perPage * pagination
     }</p>
-                              <button id="next" style="border: none; color: #ffffff; padding: 0; background: none; cursor: pointer; ${
+                              <button id="next" style="border: none; color: #ffffff; padding: 0; font-weight: 900; background: none; cursor: pointer; ${
                                 styles[siteName].nextButton
                               }">
                                   Next
@@ -301,14 +300,16 @@ const newPageLoad = async () => {
       sortBy = options[e.target.value];
       generateSimilarProducts(siteName, productName, innerHtml, createDev);
     }
-    async function fetchNextProducts() {
+    async function fetchNextProducts(e) {
       if (totalProductCount <= perPage * pagination) return;
       page++;
+      e.preventDefault();
       generateSimilarProducts(siteName, productName, innerHtml, createDev);
     }
-    async function fetchPreviousProducts() {
+    async function fetchPreviousProducts(e) {
       if (pagination === 1) return;
       page--;
+      e.preventDefault();
       generateSimilarProducts(siteName, productName, innerHtml, createDev);
     }
   }
