@@ -52,38 +52,38 @@ const newPageLoad = async () => {
     startech: {
       mainDivStyle: "padding: 0.3rem 0",
       subContainerStyle: "padding: 5px;",
-      linkStyle: "line-height: 1.6rem; font-size: 1rem",
-      priceStyle: "padding:0.6rem 0 0 0; font-size: 1rem;",
-      shopName: "padding:0.6rem 0 0 0; font-size: 1rem;",
+      linkStyle: "line-height: 1.6rem; font-size: 1.1rem",
+      priceStyle: "padding:0.6rem 0 0 0; font-size: 1.1rem;",
+      shopName: "padding:0.6rem 0 0 0; font-size: 1.1rem;",
       headerTitle:
-        "font-size: 1.6rem; margin: 0; font-weight: 700; padding: 8px 0 0 0",
+        "font-size: 1.7rem; margin: 0; font-weight: 700; padding: 8px 0 0 0",
       similarProductDivStyle: "height: 50vh; overflow: auto;",
-      resultTitle: "font-size: 1rem; margin-bottom: 0; color: #ffffff",
+      resultTitle: "font-size: 1.1rem; margin-bottom: 0; color: #ffffff",
       selectContainerStyle: "padding-bottom: 0.7rem",
-      selectStyle: "font-size: 1rem; width: auto;",
+      selectStyle: "font-size: 1.1rem; width: auto;",
       buttonContainerStyle: "padding: 1rem 0",
-      previousButton: "font-size: 1rem;",
-      nextButton: "font-size: 1rem;",
-      resultButtonTitle: "margin: 0; font-size: 1rem;",
+      previousButton: "font-size: 1.1rem;",
+      nextButton: "font-size: 1.1rem;",
+      resultButtonTitle: "margin: 0; font-size: 1.1rem;",
       loadingContainer: "height: 62vh",
       loadingHeaderContainer: "padding-top: 0.9rem;",
     },
     pickaboo: {
       mainDivStyle: "padding: 0.3rem 0",
       subContainerStyle: "padding: 5px;",
-      linkStyle: "line-height: 1.6rem; font-size: 1.5rem",
-      priceStyle: "padding:0.6rem 0 0 0; font-size: 1.5rem;",
-      shopName: "padding:0.6rem 0 0 0; font-size: 1.5rem;",
+      linkStyle: "line-height: 1.6rem; font-size: 1.6rem",
+      priceStyle: "padding:0.6rem 0 0 0; font-size: 1.6rem;",
+      shopName: "padding:0.6rem 0 0 0; font-size: 1.6rem;",
       headerTitle:
-        "font-size: 2.6rem; margin: 0; color: #ffffff; font-weight: 800; padding: 8px 0 9px 0",
+        "font-size: 2.7rem; margin: 0; color: #ffffff; font-weight: 800; padding: 8px 0 9px 0",
       similarProductDivStyle: "height: 51vh; overflow: auto;",
-      resultTitle: "font-size: 1.5rem; margin-bottom: 0; color: #ffffff",
+      resultTitle: "font-size: 1.6rem; margin-bottom: 0; color: #ffffff",
       selectContainerStyle: "padding-bottom: 0.7rem",
-      selectStyle: "font-size: 1.4rem; width: auto; color: #ffffff",
+      selectStyle: "font-size: 1.6rem; width: auto; color: #ffffff",
       buttonContainerStyle: "padding: 1rem 0",
       previousButton: "font-size: 1.3rem;",
       nextButton: "font-size: 1.3rem;",
-      resultButtonTitle: "margin: 0; font-size: 1.5rem;",
+      resultButtonTitle: "margin: 0; font-size: 1.6rem;",
       loadingContainer: "height: 62vh",
       loadingHeaderContainer: "padding-top: 0.9rem;",
     },
@@ -99,11 +99,11 @@ const newPageLoad = async () => {
       resultTitle: "font-size: 1rem; margin-bottom: 0; color: #ffffff",
       selectContainerStyle: "padding-bottom: 0.7rem",
       selectStyle: "font-size: 1rem; width: auto; color: #ffffff;",
-      buttonContainerStyle: "padding: 1rem 0",
+      buttonContainerStyle: "padding: 0.5rem 0",
       previousButton: "font-size: 1rem;",
       nextButton: "font-size: 1rem;",
       resultButtonTitle: "margin: 0; font-size: 1rem;",
-      loadingContainer: "height: 61.5vh",
+      loadingContainer: "height: 61vh",
       loadingHeaderContainer: "padding-top: 0.9rem;",
     },
     priyoshop: {
@@ -137,7 +137,7 @@ const newPageLoad = async () => {
       resultTitle: "font-size: 1rem;",
       selectContainerStyle: "padding-bottom: 0.7rem",
       selectStyle: "font-size: 1rem; color: #ffffff",
-      buttonContainerStyle: "padding: 0.6rem 0",
+      buttonContainerStyle: "padding: 0.8rem 0",
       previousButton: "font-size: 1.1rem;",
       nextButton: "font-size: 1.1rem;",
       resultButtonTitle: "font-size: 1.1rem;",
@@ -371,11 +371,11 @@ const newPageLoad = async () => {
       .setAttribute("style", "width: 27%; flex: unset;");
     document
       .querySelector(".product-details-summary .col-md-7")
-      .setAttribute("style", "width: 46%; flex: unset;");
+      .setAttribute("style", "width: 53%; flex: unset;");
 
     document.querySelector(
       ".product-details .product-images .thumbnail .main-img"
-    ).style.maxWidth = "300px";
+    ).style.maxWidth = "340px";
     const createDevStartech = document.createElement("div");
     createDevStartech.className = "compare-product-info";
     createDevStartech.innerHTML = loadingInnerHtml("startech");
