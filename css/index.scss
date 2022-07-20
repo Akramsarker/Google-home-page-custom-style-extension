@@ -1,8 +1,13 @@
 html body {
-  background-color: #f00 !important;
-  border: 1px solid red !important;
+  background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%);
+  width: 240px;
 }
 h1 {
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+p{
   color: #ffffff !important;
   font-size: 1rem;
+  line-height: 1.6rem;
 }
