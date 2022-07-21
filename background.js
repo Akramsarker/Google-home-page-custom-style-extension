@@ -303,14 +303,14 @@ const newPageLoad = async () => {
     async function fetchNextProducts(e) {
       if (totalProductCount <= perPage * pagination) return;
       page++;
-      e.preventDefault();
       generateSimilarProducts(siteName, productName, innerHtml, createDev);
+      e.preventDefault();
     }
     async function fetchPreviousProducts(e) {
       if (pagination === 1) return;
       page--;
-      e.preventDefault();
       generateSimilarProducts(siteName, productName, innerHtml, createDev);
+      e.preventDefault();
     }
   }
 
