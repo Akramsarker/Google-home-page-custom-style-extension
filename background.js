@@ -196,6 +196,7 @@ const newPageLoad = async () => {
       requestOptions
     );
     const result = await response.json();
+    console.log(result);
     const posts = result.hits.map((hit) => hit.document);
     const totalProductCount = result.found;
     let pagination = result.page;
@@ -327,7 +328,7 @@ const newPageLoad = async () => {
       "display: inline-block; width: 320px; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
     );
     createDevDaraz.innerHTML = loadingInnerHtml("daraz");
-    document.querySelector("#block-7S7Xc8ZF40").appendChild(createDevDaraz);
+    document.querySelector("#block-zz51KblGtY").appendChild(createDevDaraz);
     const productName = document.querySelector(
       ".pdp-mod-product-badge-title"
     ).innerText;
