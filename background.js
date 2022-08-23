@@ -172,6 +172,11 @@ const newPageLoad = async () => {
               </div>
         </div>`;
   }
+  const loadingScreener = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="18px" height="18px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+            <circle cx="50" cy="50" fill="none" stroke="#ffffff" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+              <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+            </circle>
+      </svg>`;
 
   // Generate Similar Products
   let sortBy = "";
@@ -196,7 +201,6 @@ const newPageLoad = async () => {
       requestOptions
     );
     const result = await response.json();
-    console.log(result);
     const posts = result.hits.map((hit) => hit.document);
     const totalProductCount = result.found;
     let pagination = result.page;
@@ -205,10 +209,12 @@ const newPageLoad = async () => {
       similarProducts += `<div style="margin-bottom: 0.8rem;
       margin-right: 0.3rem; background: #ffffff; border-radius: 3px; ${
         styles[siteName].mainDivStyle
-      }">
+      }">                   
                             <div style="display: flex; ${
                               styles[siteName].subContainerStyle
                             }">
+                            
+
                                 <img src="${
                                   post.image
                                 }" style="width: 70px; object-fit: cover;">
@@ -230,17 +236,21 @@ const newPageLoad = async () => {
                                     }">${post.shop}</p>
                                 </div>
                             </div>
+                         
                           </div>
+                         
                         </div>`;
     });
 
     innerHtml = `<div>
+
                       <h1 style="${styles[siteName].headerTitle}">
                         Similar Products
                         </h1>
                         <div style="display: flex; justify-content: space-between; align-items: center; ${
                           styles[siteName].selectContainerStyle
                         }">
+
                           <p style="${
                             styles[siteName].resultTitle
                           }">Total Result:
@@ -261,6 +271,10 @@ const newPageLoad = async () => {
                         </div>
                         <div style="${styles[siteName].similarProductDivStyle}">
                             ${similarProducts}
+                            <p style="text-align: center;
+                          ">${
+                            totalProductCount == 0 ? "No product found!" : ""
+                          }                             </p>
                         </div>
                           <div style="display: flex; justify-content: space-between; align-items: center; ${
                             styles[siteName].buttonContainerStyle
@@ -305,12 +319,14 @@ const newPageLoad = async () => {
       if (totalProductCount <= perPage * pagination) return;
       page++;
       generateSimilarProducts(siteName, productName, innerHtml, createDev);
+      document.querySelector("#next").innerHTML = loadingScreener;
       e.preventDefault();
     }
     async function fetchPreviousProducts(e) {
       if (pagination === 1) return;
       page--;
       generateSimilarProducts(siteName, productName, innerHtml, createDev);
+      document.querySelector("#previous").innerHTML = loadingScreener;
       e.preventDefault();
     }
   }
