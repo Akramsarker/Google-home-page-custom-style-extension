@@ -209,12 +209,10 @@ const newPageLoad = async () => {
       similarProducts += `<div style="margin-bottom: 0.8rem;
       margin-right: 0.3rem; background: #ffffff; border-radius: 3px; ${
         styles[siteName].mainDivStyle
-      }">                   
+      }">     
                             <div style="display: flex; ${
                               styles[siteName].subContainerStyle
                             }">
-                            
-
                                 <img src="${
                                   post.image
                                 }" style="width: 70px; object-fit: cover;">
@@ -236,21 +234,17 @@ const newPageLoad = async () => {
                                     }">${post.shop}</p>
                                 </div>
                             </div>
-                         
                           </div>
-                         
                         </div>`;
     });
 
     innerHtml = `<div>
-
                       <h1 style="${styles[siteName].headerTitle}">
                         Similar Products
                         </h1>
                         <div style="display: flex; justify-content: space-between; align-items: center; ${
                           styles[siteName].selectContainerStyle
                         }">
-
                           <p style="${
                             styles[siteName].resultTitle
                           }">Total Result:
@@ -296,6 +290,7 @@ const newPageLoad = async () => {
                               </button>
                           </div>
                     </div>`;
+
     createDev.innerHTML = innerHtml;
 
     document
@@ -365,7 +360,7 @@ const newPageLoad = async () => {
     createDevRyans.className = "compare-product-info";
     createDevRyans.setAttribute(
       "style",
-      "display: inline-block; width: 22%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px;"
+      "display: inline-block; width: 22%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; height: 65vh"
     );
     document
       .querySelector(".product-info-section .container .g-2")
