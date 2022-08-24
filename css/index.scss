@@ -1,6 +1,7 @@
 html body {
   background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%);
   width: 240px;
+  padding: 0.2rem 0.3rem;
 }
 h1 {
   color: #ffffff;
@@ -10,4 +11,14 @@ p{
   color: #ffffff !important;
   font-size: 1rem;
   line-height: 1.6rem;
+}
+.link {
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: 900;
+  transition: 0.2s;
+  &:hover {
+    color: #ffffff;
+    opacity: 0.8;
+  }
 }
