@@ -144,6 +144,44 @@ const newPageLoad = async () => {
       loadingContainer: "height: 62vh",
       loadingHeaderContainer: "padding-top: 0.9rem;",
     },
+    walcart: {
+      mainDivStyle: "padding: 0.3rem 0",
+      subContainerStyle: "padding: 5px;",
+      linkStyle: "line-height: 1.6rem; font-size: 1.6rem",
+      priceStyle: "padding:0.6rem 0 0 0; font-size: 1.6rem;",
+      shopName: "padding:0.6rem 0 0 0; font-size: 1.6rem;",
+      headerTitle:
+        "font-size: 2.7rem; margin: 0; color: #ffffff; font-weight: 800; padding: 8px 0 9px 0",
+      similarProductDivStyle: "height: 51vh; overflow: auto;",
+      resultTitle: "font-size: 1.6rem; margin-bottom: 0; color: #ffffff",
+      selectContainerStyle: "padding-bottom: 0.7rem",
+      selectStyle: "font-size: 1.6rem; width: auto; color: #ffffff",
+      buttonContainerStyle: "padding: 1.5rem 0",
+      previousButton: "font-size: 1.7rem;",
+      nextButton: "font-size: 1.7rem;",
+      resultButtonTitle: "margin: 0; font-size: 1.7rem;",
+      loadingContainer: "height: 62vh",
+      loadingHeaderContainer: "padding-top: 0.9rem;",
+    },
+    vision: {
+      mainDivStyle: "padding: 0.3rem 0",
+      subContainerStyle: "padding: 5px;",
+      linkStyle: "line-height: 1.6rem; font-size: 1.6rem",
+      priceStyle: "padding:0.6rem 0 0 0; font-size: 1.6rem;",
+      shopName: "padding:0.6rem 0 0 0; font-size: 1.6rem;",
+      headerTitle:
+        "font-size: 2.7rem; margin: 0; color: #ffffff; font-weight: 800; padding: 8px 0 9px 0",
+      similarProductDivStyle: "height: 51vh; overflow: auto;",
+      resultTitle: "font-size: 1.6rem; margin-bottom: 0; color: #ffffff",
+      selectContainerStyle: "padding-bottom: 0.7rem",
+      selectStyle: "font-size: 1.6rem; width: auto; color: #ffffff",
+      buttonContainerStyle: "padding: 1.5rem 0",
+      previousButton: "font-size: 1.7rem;",
+      nextButton: "font-size: 1.7rem;",
+      resultButtonTitle: "margin: 0; font-size: 1.7rem;",
+      loadingContainer: "height: 62vh",
+      loadingHeaderContainer: "padding-top: 0.9rem;",
+    },
   };
 
   function loadingInnerHtml(loadingSiteName) {
@@ -530,5 +568,74 @@ const newPageLoad = async () => {
         loopCounter = 0;
       }
     }
+  } else if (location.href.includes("walcart.com/")) {
+    document.querySelector(
+      ".product-info-main-content .col-xl-5"
+    ).style.maxWidth = "40%";
+    const selectedWalcartDiv = document.querySelector(
+      ".product-info-main-content > .row > .col-xl-3"
+    );
+    selectedWalcartDiv.innerHTML = loadingInnerHtml("walcart");
+    const productName = document.querySelector(".page-title .base").innerText;
+    document
+      .querySelector(".product-info-main-content > .row > .col-xl-3")
+      .setAttribute(
+        "style",
+        "display: inline-block; width: 27%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; margin-left: 0.5rem; height: 67vh"
+      );
+
+    generateSimilarProducts(
+      "walcart",
+      productName,
+      loadingInnerHtml("walcart"),
+      selectedWalcartDiv
+    );
+  } else if (location.href.includes("vision.com.bd/")) {
+    document.querySelector(".ty-product-block__img-wrapper").style.maxWidth =
+      "34%";
+
+    document.querySelector(".ut2-pb__right").style.maxWidth = "36%";
+    const createDevVision = document.createElement("div");
+
+    createDevVision.className = "compare-product-info";
+
+    createDevVision.innerHTML = loadingInnerHtml("vision");
+
+    document.querySelector(".ut2-pb__wrapper").appendChild(createDevVision);
+
+    createDevVision.setAttribute(
+      "style",
+      "display: inline-block; width: 30%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; height: 67vh"
+    );
+    const productName = document.querySelector(".ut2-pb__title").innerText;
+    generateSimilarProducts(
+      "vision",
+      productName,
+      loadingInnerHtml("vision"),
+      createDevVision
+    );
+  } else if (location.href.includes("bdshop.com/")) {
+    document.querySelector(".main-container").style.maxWidth = "1400px";
+    document.querySelector(".col-xl-4").style.maxWidth = "25%";
+    document.querySelector(".col-xl-5").style.maxWidth = "25%";
+    document.querySelector(".col-xl-3").style.maxWidth = "auto";
+
+    const createDevBdShop = document.createElement("div");
+    createDevBdShop.className = "compare-product-info";
+    createDevBdShop.innerHTML = loadingInnerHtml("vision");
+    document
+      .querySelector(".product-info-main-content > .row")
+      .appendChild(createDevBdShop);
+    createDevBdShop.setAttribute(
+      "style",
+      "display: inline-block; width: 25%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; height: 67vh"
+    );
+    const productName = document.querySelector(".page-title").innerText;
+    generateSimilarProducts(
+      "vision",
+      productName,
+      loadingInnerHtml("vision"),
+      createDevBdShop
+    );
   }
 };
