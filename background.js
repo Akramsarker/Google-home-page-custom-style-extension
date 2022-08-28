@@ -166,6 +166,25 @@ const newPageLoad = async () => {
     vision: {
       mainDivStyle: "padding: 0.3rem 0",
       subContainerStyle: "padding: 5px;",
+      linkStyle: "line-height: 1.6rem; font-size: 1rem",
+      priceStyle: "padding:0.6rem 0 0 0; font-size: 1rem;",
+      shopName: "padding:0.6rem 0 0 0; font-size: 1rem;",
+      headerTitle:
+        "font-size: 1.5rem; color: #ffffff; margin: 0; font-weight: 700; padding: 10px 0 9px 0",
+      similarProductDivStyle: "height: 51vh; overflow: auto;",
+      resultTitle: "font-size: 1rem; margin-bottom: 0; color: #ffffff",
+      selectContainerStyle: "padding-bottom: 0.7rem",
+      selectStyle: "font-size: 1rem;",
+      buttonContainerStyle: "padding: 0.8rem 0",
+      previousButton: "font-size: 1rem;",
+      nextButton: "font-size: 1rem;",
+      resultButtonTitle: "margin: 0; font-size: 1rem;",
+      loadingContainer: "height: 62vh",
+      loadingHeaderContainer: "padding-top: 0.9rem;",
+    },
+    bdshop: {
+      mainDivStyle: "padding: 0.3rem 0",
+      subContainerStyle: "padding: 5px;",
       linkStyle: "line-height: 1.6rem; font-size: 1.6rem",
       priceStyle: "padding:0.6rem 0 0 0; font-size: 1.6rem;",
       shopName: "padding:0.6rem 0 0 0; font-size: 1.6rem;",
@@ -179,6 +198,44 @@ const newPageLoad = async () => {
       previousButton: "font-size: 1.7rem;",
       nextButton: "font-size: 1.7rem;",
       resultButtonTitle: "margin: 0; font-size: 1.7rem;",
+      loadingContainer: "height: 62vh",
+      loadingHeaderContainer: "padding-top: 0.9rem;",
+    },
+    ajkerdeal: {
+      mainDivStyle: "padding: 0.3rem 0",
+      subContainerStyle: "padding: 5px;",
+      linkStyle: "line-height: 1.6rem; font-size: 1.6rem",
+      priceStyle: "padding:0.6rem 0 0 0; font-size: 1.6rem;",
+      shopName: "padding:0.6rem 0 0 0; font-size: 1.6rem;",
+      headerTitle:
+        "font-size: 2.7rem; margin: 0; color: #ffffff; font-weight: 800; padding: 8px 0 9px 0",
+      similarProductDivStyle: "height: 51vh; overflow: auto;",
+      resultTitle: "font-size: 1.6rem; margin-bottom: 0; color: #ffffff",
+      selectContainerStyle: "padding-bottom: 0.7rem",
+      selectStyle: "font-size: 1.6rem; width: auto; color: #ffffff",
+      buttonContainerStyle: "padding: 1.5rem 0",
+      previousButton: "font-size: 1.7rem;",
+      nextButton: "font-size: 1.7rem;",
+      resultButtonTitle: "margin: 0; font-size: 1.7rem;",
+      loadingContainer: "height: 62vh",
+      loadingHeaderContainer: "padding-top: 0.9rem;",
+    },
+    rokomari: {
+      mainDivStyle: "padding: 0.3rem 0",
+      subContainerStyle: "padding: 5px;",
+      linkStyle: "line-height: 1.6rem; font-size: 1rem",
+      priceStyle: "padding:0.6rem 0 0 0; font-size: 1rem;",
+      shopName: "padding:0.6rem 0 0 0; font-size: 1rem;",
+      headerTitle:
+        "font-size: 1.5rem; margin: 0; color: #ffffff; font-weight: 700; padding: 10px 0 9px 0",
+      similarProductDivStyle: "height: 51vh; overflow: auto;",
+      resultTitle: "font-size: 1rem; margin-bottom: 0; color: #ffffff",
+      selectContainerStyle: "padding-bottom: 0.7rem",
+      selectStyle: "font-size: 1rem;",
+      buttonContainerStyle: "padding: 0.8rem 0",
+      previousButton: "font-size: 1rem;",
+      nextButton: "font-size: 1rem;",
+      resultButtonTitle: "margin: 0; font-size: 1rem;",
       loadingContainer: "height: 62vh",
       loadingHeaderContainer: "padding-top: 0.9rem;",
     },
@@ -632,10 +689,54 @@ const newPageLoad = async () => {
     );
     const productName = document.querySelector(".page-title").innerText;
     generateSimilarProducts(
-      "vision",
+      "bdshop",
       productName,
-      loadingInnerHtml("vision"),
+      loadingInnerHtml("bdshop"),
       createDevBdShop
+    );
+  } else if (location.href.includes("ajkerdeal.com/")) {
+    document.querySelector(
+      ".deal-details-container-main .col-lg-5"
+    ).style.width = "25%";
+    document.querySelector(
+      ".deal-details-container-main .col-lg-7"
+    ).style.width = "47%";
+    const createDevAjkerDeal = document.createElement("div");
+    createDevAjkerDeal.className = "compare-product-info";
+    createDevAjkerDeal.innerHTML = loadingInnerHtml("ajkerdeal");
+    document
+      .querySelector(".deal-details-container-main  .col-xs-12")
+      .appendChild(createDevAjkerDeal);
+    createDevAjkerDeal.setAttribute(
+      "style",
+      "display: inline-block; width: 28%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; height: 65vh"
+    );
+    const productName = document.querySelector(".deal-title-new").innerText;
+    generateSimilarProducts(
+      "ajkerdeal",
+      productName,
+      loadingInnerHtml("ajkerdeal"),
+      createDevAjkerDeal
+    );
+  } else if (location.href.includes("rokomari.com/")) {
+    const createDevRokomari = document.createElement("div");
+    createDevRokomari.className = "compare-product-info";
+    createDevRokomari.innerHTML = loadingInnerHtml("rokomari");
+    document
+      .querySelector(".details-book-section > .row")
+      .appendChild(createDevRokomari);
+    createDevRokomari.setAttribute(
+      "style",
+      "display: inline-block; width: 340px; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; height: 66vh"
+    );
+    const productName = document.querySelector(
+      ".details-book-main-info__header > h1"
+    ).innerText;
+    generateSimilarProducts(
+      "rokomari",
+      productName,
+      loadingInnerHtml("rokomari"),
+      createDevRokomari
     );
   }
 };
