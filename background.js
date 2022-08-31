@@ -170,15 +170,15 @@ const newPageLoad = async () => {
       priceStyle: "padding:0.6rem 0 0 0; font-size: 1rem;",
       shopName: "padding:0.6rem 0 0 0; font-size: 1rem;",
       headerTitle:
-        "font-size: 1.5rem; color: #ffffff; margin: 0; font-weight: 700; padding: 10px 0 9px 0",
+        "font-size: 1.9rem; color: #ffffff; margin: 0; font-weight: 700; padding: 10px 0 9px 0",
       similarProductDivStyle: "height: 51vh; overflow: auto;",
-      resultTitle: "font-size: 1rem; margin-bottom: 0; color: #ffffff",
+      resultTitle: "font-size: 1.1rem; margin-bottom: 0; color: #ffffff",
       selectContainerStyle: "padding-bottom: 0.7rem",
-      selectStyle: "font-size: 1rem;",
+      selectStyle: "font-size: 1.2rem;",
       buttonContainerStyle: "padding: 0.8rem 0",
       previousButton: "font-size: 1rem;",
       nextButton: "font-size: 1rem;",
-      resultButtonTitle: "margin: 0; font-size: 1rem;",
+      resultButtonTitle: "margin: 0; font-size: 1.2rem;",
       loadingContainer: "height: 62vh",
       loadingHeaderContainer: "padding-top: 0.9rem;",
     },
@@ -189,15 +189,15 @@ const newPageLoad = async () => {
       priceStyle: "padding:0.6rem 0 0 0; font-size: 1.6rem;",
       shopName: "padding:0.6rem 0 0 0; font-size: 1.6rem;",
       headerTitle:
-        "font-size: 2.7rem; margin: 0; color: #ffffff; font-weight: 800; padding: 8px 0 9px 0",
+        "font-size: 2.7rem; margin: 0; color: #ffffff; font-weight: 800; padding: 8px 0 0 0",
       similarProductDivStyle: "height: 51vh; overflow: auto;",
-      resultTitle: "font-size: 1.6rem; margin-bottom: 0; color: #ffffff",
+      resultTitle: "font-size: 1.7rem; margin-bottom: 0; color: #ffffff",
       selectContainerStyle: "padding-bottom: 0.7rem",
-      selectStyle: "font-size: 1.6rem; width: auto; color: #ffffff",
+      selectStyle: "font-size: 1.7rem; width: auto; color: #ffffff",
       buttonContainerStyle: "padding: 1.5rem 0",
       previousButton: "font-size: 1.7rem;",
       nextButton: "font-size: 1.7rem;",
-      resultButtonTitle: "margin: 0; font-size: 1.7rem;",
+      resultButtonTitle: "margin: 0; font-size: 1.8rem;",
       loadingContainer: "height: 62vh",
       loadingHeaderContainer: "padding-top: 0.9rem;",
     },
@@ -662,7 +662,7 @@ const newPageLoad = async () => {
 
     createDevVision.setAttribute(
       "style",
-      "display: inline-block; width: 30%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; height: 67vh"
+      "display: inline-block; width: 30%; background: linear-gradient(201.76deg, #9E00FF -1.89%, #FE4242 54.02%, rgba(158, 0, 255, 0.9) 108.78%); color: #ffffff; padding: 0 12px; height: 67.5vh"
     );
     const productName = document.querySelector(".ut2-pb__title").innerText;
     generateSimilarProducts(
