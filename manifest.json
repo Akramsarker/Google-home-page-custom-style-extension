@@ -2,9 +2,9 @@
   "manifest_version": 3,
   "version": "1.0",
 
-  "name": "MulloKoto",
-  "description": "Find the best deal online from all the ecommerce sites in Bangladesh",
-  "author": "Md Nasim Uddin",
+  "name": "Google Home page Custom style",
+  "description": "Google home page custom style",
+  "author": "Md Akram Sheikh",
   "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
 
   "action": {
